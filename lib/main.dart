@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:timesheet/screens/timesheet.dart';
 
 String fetchMeQueryString = """
   query Me {
@@ -8,6 +9,10 @@ String fetchMeQueryString = """
       id
       email
       displayName
+      currentTimesheet {
+        id
+        month
+      }
     }
   }
 """;
@@ -22,7 +27,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final HttpLink httpLink = HttpLink('http://192.168.1.4:4001/graphql');
+    final HttpLink httpLink = HttpLink('http://192.168.1.5:4001/graphql');
+    // final HttpLink httpLink = HttpLink('http://10.0.2.2:4001/graphql');
 
     final AuthLink authLink = AuthLink(
       getToken: () => 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY5MDgyNTUzNSwiZXhwIjoxNjk2MDA5NTM1LCJzdWIiOiI2NDZiYTVhZDA1MWQ5MDU5OGE2MjMwNGMifQ.Dr2ReWAgjKQTRvqAX8tq25EqBsu9WSI6OGQIdfZl4eXVt7BusFab07dXjgwvLYUTlZYVo3cjyoLGWSlHCRBh0VJhaPsNSAbVGMZcIbWNqL9Xx-gx6UqguVHc3N819d4Cyi-k5EXgw-HQdPL2ngCZcwxzKjs50zIUu09efduazn7fx5_gUi9L03qqU4MR7ZTGLOmj0O9igW8Bbq13QUBOO9JR2tZ2iAO2t1PWyUOOxL0S69eqHhMddFEZkSbPycPsH8y7lAGcrUgizZEnxky0fls6rWxzgYLAyXC2qQj4BPj4cArBr2KJFOB3jYx02EcVpr34fB9E3PeLPn3Ei3LZF9lDbtgYOJoqRkWULdsE8ihNRjpamUVVOWCgo534rLBiSdCYR_tnp8Nw1iI9wYePHVUKTRzLBdx5p0-RzxTQvm4JxLIQvU4_dZNtiIAuD-aidvGi1NJGF-g_Uv32u4wcIa-FL8gaYE_Nrnx2OnkWMVj1GFzsotJ-ImX37ScgWIP2K-SluMDdxFw35F4Tho3oOdqJA359bSGYc7Kf7ZAYHqVDD7DE8UpFKR6E3gjBLae012kS4jDmOWj3PYwtcsqpr0J4KrSnb9ZhKad_42DurmmfQOsyT32hBd0pEQzIrsx00Ucrk9wMI_MwFl4bIe0-GSuB-ORoqvcoyFWDmtxMu3w'
@@ -66,37 +72,46 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// class MyHomePage extends StatelessWidget {
+//   const MyHomePage({ Key? key }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('GraphQL Example'),
+//       ),
+//       body: Query(
+//         options: QueryOptions(document: gql(fetchMeQueryString)),
+//         builder: (result, { fetchMore, refetch }) {
+//           // final fetchMeResult = useQuery(
+//           //   QueryOptions(
+//           //     document: gql(fetchMeQueryString)
+//           //   ),
+//           // );
+
+//           // final result = fetchMeResult.result;
+
+//           if (result.hasException) {
+//             return Text(result.exception.toString());
+//           }
+
+//           if (result.isLoading) {
+//             return const Text('Loading');
+//           }
+
+//           return Text(result.data!['me'].toString());
+//         }
+//       ),
+//     );
+//   }
+// }
+
 class MyHomePage extends StatelessWidget {
   const MyHomePage({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('GraphQL Example'),
-      ),
-      body: Query(
-        options: QueryOptions(document: gql(fetchMeQueryString)),
-        builder: (result, { fetchMore, refetch }) {
-          // final fetchMeResult = useQuery(
-          //   QueryOptions(
-          //     document: gql(fetchMeQueryString)
-          //   ),
-          // );
-
-          // final result = fetchMeResult.result;
-
-          if (result.hasException) {
-            return Text(result.exception.toString());
-          }
-
-          if (result.isLoading) {
-            return const Text('Loading');
-          }
-
-          return Text(result.data!['me'].toString());
-        }
-      ),
-    );
+    return const TimesheetList();
   }
 }
