@@ -55,38 +55,41 @@ class TimesheetTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+
     return Query(
-      options: QueryOptions(
-        document: gql(constants.timesheetsQuery),
-        variables: {
+        options:
+            QueryOptions(document: gql(constants.timesheetsQuery), variables: {
           'pageIndex': 0,
-          'pageSize': 12
-        }
-      ),
-      builder: (result, { fetchMore, refetch }) {
-        if (result.hasException) {
-      return Text(result.exception.toString());
-    }
+          'pageSize': 12,
+          'filter': {'year': now.year.toString()}
+        }),
+        builder: (result, {fetchMore, refetch}) {
+          if (result.hasException) {
+            return Text(result.exception.toString());
+          }
 
-    if (result.isLoading) {
-      return const CircularProgressIndicator();
-    }
+          if (result.isLoading) {
+            return const CircularProgressIndicator();
+          }
 
-    // return Text(result.data.toString());
+          // return Text(result.data.toString());
 
-    final timesheets = result.data!['timesheets']['data'];
+          final timesheets = result.data!['timesheets']['data'];
 
-    return ListView.builder(
-      itemCount: timesheets.length,
-      itemBuilder: (context, index) {
-        final timesheet = timesheets[index];
-
-        return ListTile(
-          title: Text(timesheet['month']),
-        );
-      }
-    );
-      }
-    );
+          return DataTable(
+              columns: const <DataColumn>[
+                DataColumn(label: Text('Mese')),
+                DataColumn(label: Text('Monte ore')),
+                DataColumn(label: Text('Stato')),
+              ],
+              rows: timesheets
+                  .map<DataRow>((timesheet) => DataRow(cells: <DataCell>[
+                        DataCell(Text(timesheet['month'])),
+                        DataCell(Text(timesheet['totalTime'].toString())),
+                        DataCell(Text(timesheet['status'])),
+                      ]))
+                  .toList());
+        });
   }
 }
