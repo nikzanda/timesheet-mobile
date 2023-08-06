@@ -1,3 +1,4 @@
+// ignore_for_file: type=lint
 class Input$ActivitiesCreateInput {
   factory Input$ActivitiesCreateInput({
     required String timesheetId,
