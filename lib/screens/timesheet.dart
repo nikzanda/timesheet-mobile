@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:timesheet/helpers/helpers.dart';
-import 'queries.graphql.dart' as constants;
+import 'package:timesheet/schema.graphql.dart';
+import 'package:timesheet/screens/timesheet.graphql.dart';
+import '../helpers/helpers.dart';
 
 class TimesheetList extends StatelessWidget {
   const TimesheetList({super.key});
@@ -21,7 +22,7 @@ class TimesheetList extends StatelessWidget {
   }
 }
 
-class TimesheetTable extends StatelessWidget {
+class TimesheetTable extends HookWidget {
   const TimesheetTable({super.key});
 
   @override
@@ -59,52 +60,49 @@ class TimesheetTable extends StatelessWidget {
       },
     };
 
-    return Query(
-        options:
-            QueryOptions(document: gql(constants.timesheetsQuery), variables: {
-          'pageIndex': 0,
-          'pageSize': 12,
-          'filter': {'year': now.year.toString()}
-        }),
-        builder: (result, {fetchMore, refetch}) {
-          if (result.hasException) {
-            return Text(result.exception.toString());
-          }
+    final result = useQuery$Timesheets(Options$Query$Timesheets(
+        variables: Variables$Query$Timesheets(
+            pageIndex: 0,
+            pageSize: 12,
+            filter: Input$TimesheetFilter(year: now.year.toString()))));
 
-          if (result.isLoading) {
-            return const CircularProgressIndicator();
-          }
+    if (result.result.hasException) {
+      return Text(result.result.exception.toString());
+    }
 
-          final timesheets = result.data!['timesheets']['data'];
+    if (result.result.isLoading) {
+      return const CircularProgressIndicator();
+    }
 
-          return DataTable(
-              columns: const <DataColumn>[
-                DataColumn(label: Text('Mese')),
-                DataColumn(label: Text('Monte ore')),
-                DataColumn(label: Text('Stato')),
-              ],
-              rows: timesheets.map<DataRow>((timesheet) {
-                final month = DateFormat('MMMM')
-                    .format(DateTime.parse(timesheet['month'] + '-01'));
-                final totalTime = toTime(timesheet['totalTime']);
+    final timesheets = result.result.data!['timesheets']['data'];
 
-                final backgroundColor =
-                    statuses[timesheet['status']]!['color'] as Color;
+    return DataTable(
+        columns: const <DataColumn>[
+          DataColumn(label: Text('Mese')),
+          DataColumn(label: Text('Monte ore')),
+          DataColumn(label: Text('Stato')),
+        ],
+        rows: (timesheets as dynamic).map<DataRow>((timesheet) {
+          final month = DateFormat('MMMM')
+              .format(DateTime.parse(timesheet['month'] + '-01'));
+          final totalTime = toTime(timesheet['totalTime']);
 
-                return DataRow(cells: <DataCell>[
-                  DataCell(Text(month)),
-                  DataCell(Text(totalTime)),
-                  DataCell(Chip(
-                    backgroundColor: backgroundColor,
-                    avatar:
-                        const FaIcon(FontAwesomeIcons.pen, color: Colors.white),
-                    label: Text(
-                      timesheet['status'],
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ))
-                ]);
-              }).toList());
-        });
+          final backgroundColor =
+              statuses[timesheet['status']]!['color'] as Color;
+          final icon = statuses[timesheet['status']]!['icon'] as FaIcon;
+
+          return DataRow(cells: <DataCell>[
+            DataCell(Text(month)),
+            DataCell(Text(totalTime)),
+            DataCell(Chip(
+              backgroundColor: backgroundColor,
+              avatar: icon,
+              label: Text(
+                (timesheet['status'] as String).toLowerCase(),
+                style: const TextStyle(color: Colors.white),
+              ),
+            ))
+          ]);
+        }).toList());
   }
 }
