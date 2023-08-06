@@ -38,6 +38,8 @@ dependencies:
   graphql: ^5.0.1
   graphql_flutter: ^5.0.1
   flutter_hooks: ^0.20.0
+  intl: ^0.18.1
+  font_awesome_flutter: ^10.5.0
 
 dependency_overrides:
   web_socket_channel: 2.2.0
