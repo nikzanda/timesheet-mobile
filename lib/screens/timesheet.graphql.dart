@@ -6,6 +6,274 @@ import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 
+class Fragment$TimesheetListItem {
+  Fragment$TimesheetListItem({
+    required this.id,
+    required this.month,
+    required this.status,
+    required this.totalTime,
+    this.$__typename = 'Timesheet',
+  });
+
+  factory Fragment$TimesheetListItem.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$month = json['month'];
+    final l$status = json['status'];
+    final l$totalTime = json['totalTime'];
+    final l$$__typename = json['__typename'];
+    return Fragment$TimesheetListItem(
+      id: (l$id as String),
+      month: (l$month as String),
+      status: fromJson$Enum$TimesheetStatusEnum((l$status as String)),
+      totalTime: (l$totalTime as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String id;
+
+  final String month;
+
+  final Enum$TimesheetStatusEnum status;
+
+  final int totalTime;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = l$id;
+    final l$month = month;
+    _resultData['month'] = l$month;
+    final l$status = status;
+    _resultData['status'] = toJson$Enum$TimesheetStatusEnum(l$status);
+    final l$totalTime = totalTime;
+    _resultData['totalTime'] = l$totalTime;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$month = month;
+    final l$status = status;
+    final l$totalTime = totalTime;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$month,
+      l$status,
+      l$totalTime,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Fragment$TimesheetListItem) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$month = month;
+    final lOther$month = other.month;
+    if (l$month != lOther$month) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$totalTime = totalTime;
+    final lOther$totalTime = other.totalTime;
+    if (l$totalTime != lOther$totalTime) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$TimesheetListItem
+    on Fragment$TimesheetListItem {
+  CopyWith$Fragment$TimesheetListItem<Fragment$TimesheetListItem>
+      get copyWith => CopyWith$Fragment$TimesheetListItem(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Fragment$TimesheetListItem<TRes> {
+  factory CopyWith$Fragment$TimesheetListItem(
+    Fragment$TimesheetListItem instance,
+    TRes Function(Fragment$TimesheetListItem) then,
+  ) = _CopyWithImpl$Fragment$TimesheetListItem;
+
+  factory CopyWith$Fragment$TimesheetListItem.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$TimesheetListItem;
+
+  TRes call({
+    String? id,
+    String? month,
+    Enum$TimesheetStatusEnum? status,
+    int? totalTime,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl$Fragment$TimesheetListItem<TRes>
+    implements CopyWith$Fragment$TimesheetListItem<TRes> {
+  _CopyWithImpl$Fragment$TimesheetListItem(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment$TimesheetListItem _instance;
+
+  final TRes Function(Fragment$TimesheetListItem) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? month = _undefined,
+    Object? status = _undefined,
+    Object? totalTime = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Fragment$TimesheetListItem(
+        id: id == _undefined || id == null ? _instance.id : (id as String),
+        month: month == _undefined || month == null
+            ? _instance.month
+            : (month as String),
+        status: status == _undefined || status == null
+            ? _instance.status
+            : (status as Enum$TimesheetStatusEnum),
+        totalTime: totalTime == _undefined || totalTime == null
+            ? _instance.totalTime
+            : (totalTime as int),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+}
+
+class _CopyWithStubImpl$Fragment$TimesheetListItem<TRes>
+    implements CopyWith$Fragment$TimesheetListItem<TRes> {
+  _CopyWithStubImpl$Fragment$TimesheetListItem(this._res);
+
+  TRes _res;
+
+  call({
+    String? id,
+    String? month,
+    Enum$TimesheetStatusEnum? status,
+    int? totalTime,
+    String? $__typename,
+  }) =>
+      _res;
+}
+
+const fragmentDefinitionTimesheetListItem = FragmentDefinitionNode(
+  name: NameNode(value: 'TimesheetListItem'),
+  typeCondition: TypeConditionNode(
+      on: NamedTypeNode(
+    name: NameNode(value: 'Timesheet'),
+    isNonNull: false,
+  )),
+  directives: [],
+  selectionSet: SelectionSetNode(selections: [
+    FieldNode(
+      name: NameNode(value: 'id'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'month'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'status'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: 'totalTime'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+    FieldNode(
+      name: NameNode(value: '__typename'),
+      alias: null,
+      arguments: [],
+      directives: [],
+      selectionSet: null,
+    ),
+  ]),
+);
+const documentNodeFragmentTimesheetListItem = DocumentNode(definitions: [
+  fragmentDefinitionTimesheetListItem,
+]);
+
+extension ClientExtension$Fragment$TimesheetListItem on graphql.GraphQLClient {
+  void writeFragment$TimesheetListItem({
+    required Fragment$TimesheetListItem data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) =>
+      this.writeFragment(
+        graphql.FragmentRequest(
+          idFields: idFields,
+          fragment: const graphql.Fragment(
+            fragmentName: 'TimesheetListItem',
+            document: documentNodeFragmentTimesheetListItem,
+          ),
+        ),
+        data: data.toJson(),
+        broadcast: broadcast,
+      );
+  Fragment$TimesheetListItem? readFragment$TimesheetListItem({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'TimesheetListItem',
+          document: documentNodeFragmentTimesheetListItem,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$TimesheetListItem.fromJson(result);
+  }
+}
+
 class Variables$Query$Timesheets {
   factory Variables$Query$Timesheets({
     required int pageIndex,
@@ -352,33 +620,9 @@ const documentNodeQueryTimesheets = DocumentNode(definitions: [
             arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'id'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'TimesheetListItem'),
                 directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'month'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'status'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'totalTime'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
               ),
               FieldNode(
                 name: NameNode(value: '__typename'),
@@ -407,6 +651,7 @@ const documentNodeQueryTimesheets = DocumentNode(definitions: [
       ),
     ]),
   ),
+  fragmentDefinitionTimesheetListItem,
 ]);
 Query$Timesheets _parserFn$Query$Timesheets(Map<String, dynamic> data) =>
     Query$Timesheets.fromJson(data);
@@ -568,14 +813,14 @@ class Query$Timesheets$timesheets {
     final l$$__typename = json['__typename'];
     return Query$Timesheets$timesheets(
       data: (l$data as List<dynamic>)
-          .map((e) => Query$Timesheets$timesheets$data.fromJson(
-              (e as Map<String, dynamic>)))
+          .map((e) =>
+              Fragment$TimesheetListItem.fromJson((e as Map<String, dynamic>)))
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Query$Timesheets$timesheets$data> data;
+  final List<Fragment$TimesheetListItem> data;
 
   final String $__typename;
 
@@ -647,14 +892,14 @@ abstract class CopyWith$Query$Timesheets$timesheets<TRes> {
       _CopyWithStubImpl$Query$Timesheets$timesheets;
 
   TRes call({
-    List<Query$Timesheets$timesheets$data>? data,
+    List<Fragment$TimesheetListItem>? data,
     String? $__typename,
   });
   TRes data(
-      Iterable<Query$Timesheets$timesheets$data> Function(
+      Iterable<Fragment$TimesheetListItem> Function(
               Iterable<
-                  CopyWith$Query$Timesheets$timesheets$data<
-                      Query$Timesheets$timesheets$data>>)
+                  CopyWith$Fragment$TimesheetListItem<
+                      Fragment$TimesheetListItem>>)
           _fn);
 }
 
@@ -678,20 +923,20 @@ class _CopyWithImpl$Query$Timesheets$timesheets<TRes>
       _then(Query$Timesheets$timesheets(
         data: data == _undefined || data == null
             ? _instance.data
-            : (data as List<Query$Timesheets$timesheets$data>),
+            : (data as List<Fragment$TimesheetListItem>),
         $__typename: $__typename == _undefined || $__typename == null
             ? _instance.$__typename
             : ($__typename as String),
       ));
   TRes data(
-          Iterable<Query$Timesheets$timesheets$data> Function(
+          Iterable<Fragment$TimesheetListItem> Function(
                   Iterable<
-                      CopyWith$Query$Timesheets$timesheets$data<
-                          Query$Timesheets$timesheets$data>>)
+                      CopyWith$Fragment$TimesheetListItem<
+                          Fragment$TimesheetListItem>>)
               _fn) =>
       call(
-          data: _fn(_instance.data
-              .map((e) => CopyWith$Query$Timesheets$timesheets$data(
+          data:
+              _fn(_instance.data.map((e) => CopyWith$Fragment$TimesheetListItem(
                     e,
                     (i) => i,
                   ))).toList());
@@ -704,192 +949,9 @@ class _CopyWithStubImpl$Query$Timesheets$timesheets<TRes>
   TRes _res;
 
   call({
-    List<Query$Timesheets$timesheets$data>? data,
+    List<Fragment$TimesheetListItem>? data,
     String? $__typename,
   }) =>
       _res;
   data(_fn) => _res;
-}
-
-class Query$Timesheets$timesheets$data {
-  Query$Timesheets$timesheets$data({
-    required this.id,
-    required this.month,
-    required this.status,
-    required this.totalTime,
-    this.$__typename = 'Timesheet',
-  });
-
-  factory Query$Timesheets$timesheets$data.fromJson(Map<String, dynamic> json) {
-    final l$id = json['id'];
-    final l$month = json['month'];
-    final l$status = json['status'];
-    final l$totalTime = json['totalTime'];
-    final l$$__typename = json['__typename'];
-    return Query$Timesheets$timesheets$data(
-      id: (l$id as String),
-      month: (l$month as String),
-      status: fromJson$Enum$TimesheetStatusEnum((l$status as String)),
-      totalTime: (l$totalTime as int),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final String id;
-
-  final String month;
-
-  final Enum$TimesheetStatusEnum status;
-
-  final int totalTime;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = l$id;
-    final l$month = month;
-    _resultData['month'] = l$month;
-    final l$status = status;
-    _resultData['status'] = toJson$Enum$TimesheetStatusEnum(l$status);
-    final l$totalTime = totalTime;
-    _resultData['totalTime'] = l$totalTime;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$month = month;
-    final l$status = status;
-    final l$totalTime = totalTime;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$month,
-      l$status,
-      l$totalTime,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (!(other is Query$Timesheets$timesheets$data) ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$month = month;
-    final lOther$month = other.month;
-    if (l$month != lOther$month) {
-      return false;
-    }
-    final l$status = status;
-    final lOther$status = other.status;
-    if (l$status != lOther$status) {
-      return false;
-    }
-    final l$totalTime = totalTime;
-    final lOther$totalTime = other.totalTime;
-    if (l$totalTime != lOther$totalTime) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension$Query$Timesheets$timesheets$data
-    on Query$Timesheets$timesheets$data {
-  CopyWith$Query$Timesheets$timesheets$data<Query$Timesheets$timesheets$data>
-      get copyWith => CopyWith$Query$Timesheets$timesheets$data(
-            this,
-            (i) => i,
-          );
-}
-
-abstract class CopyWith$Query$Timesheets$timesheets$data<TRes> {
-  factory CopyWith$Query$Timesheets$timesheets$data(
-    Query$Timesheets$timesheets$data instance,
-    TRes Function(Query$Timesheets$timesheets$data) then,
-  ) = _CopyWithImpl$Query$Timesheets$timesheets$data;
-
-  factory CopyWith$Query$Timesheets$timesheets$data.stub(TRes res) =
-      _CopyWithStubImpl$Query$Timesheets$timesheets$data;
-
-  TRes call({
-    String? id,
-    String? month,
-    Enum$TimesheetStatusEnum? status,
-    int? totalTime,
-    String? $__typename,
-  });
-}
-
-class _CopyWithImpl$Query$Timesheets$timesheets$data<TRes>
-    implements CopyWith$Query$Timesheets$timesheets$data<TRes> {
-  _CopyWithImpl$Query$Timesheets$timesheets$data(
-    this._instance,
-    this._then,
-  );
-
-  final Query$Timesheets$timesheets$data _instance;
-
-  final TRes Function(Query$Timesheets$timesheets$data) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? month = _undefined,
-    Object? status = _undefined,
-    Object? totalTime = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query$Timesheets$timesheets$data(
-        id: id == _undefined || id == null ? _instance.id : (id as String),
-        month: month == _undefined || month == null
-            ? _instance.month
-            : (month as String),
-        status: status == _undefined || status == null
-            ? _instance.status
-            : (status as Enum$TimesheetStatusEnum),
-        totalTime: totalTime == _undefined || totalTime == null
-            ? _instance.totalTime
-            : (totalTime as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
-}
-
-class _CopyWithStubImpl$Query$Timesheets$timesheets$data<TRes>
-    implements CopyWith$Query$Timesheets$timesheets$data<TRes> {
-  _CopyWithStubImpl$Query$Timesheets$timesheets$data(this._res);
-
-  TRes _res;
-
-  call({
-    String? id,
-    String? month,
-    Enum$TimesheetStatusEnum? status,
-    int? totalTime,
-    String? $__typename,
-  }) =>
-      _res;
 }

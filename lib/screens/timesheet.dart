@@ -30,34 +30,21 @@ class TimesheetTable extends HookWidget {
     DateTime now = DateTime.now();
 
     const statuses = {
-      'NOT-FOUND': {
-        'icon': FaIcon(
-          FontAwesomeIcons.calendarXmark,
-          color: Colors.white,
-        ),
-        'color': Colors.red
-      },
-      'OPEN': {
-        'icon': FaIcon(FontAwesomeIcons.pen, color: Colors.white),
-        'color': Color(0xff1890ff)
-      },
-      'PENDING': {
-        'icon': FaIcon(
-          FontAwesomeIcons.userClock,
-          color: Colors.white,
-        )
-      },
-      'REJECTED': {
-        'icon': FaIcon(FontAwesomeIcons.calendarXmark, color: Colors.white),
-        'color': Colors.redAccent,
-      },
-      'CLOSED': {
-        'icon': FaIcon(
-          FontAwesomeIcons.calendarCheck,
-          color: Colors.white,
-        ),
-        'color': Color(0xFF389e0d)
-      },
+      'NOT-FOUND': FaIcon(
+        FontAwesomeIcons.calendarXmark,
+        color: Colors.red,
+      ),
+      'OPEN': FaIcon(FontAwesomeIcons.pen, color: Color(0xff1890ff)),
+      'PENDING': FaIcon(
+        FontAwesomeIcons.userClock,
+        color: Colors.orange,
+      ),
+      'REJECTED':
+          FaIcon(FontAwesomeIcons.calendarXmark, color: Colors.redAccent),
+      'CLOSED': FaIcon(
+        FontAwesomeIcons.calendarCheck,
+        color: Color(0xFF389e0d),
+      ),
     };
 
     final result = useQuery$Timesheets(Options$Query$Timesheets(
@@ -74,6 +61,7 @@ class TimesheetTable extends HookWidget {
       return const CircularProgressIndicator();
     }
 
+    // final timesheets = result.result.data!['timesheets']['data'] as List<Fragment$TimesheetListItem>;
     final timesheets = result.result.data!['timesheets']['data'];
 
     return DataTable(
@@ -82,26 +70,20 @@ class TimesheetTable extends HookWidget {
           DataColumn(label: Text('Monte ore')),
           DataColumn(label: Text('Stato')),
         ],
-        rows: (timesheets as dynamic).map<DataRow>((timesheet) {
+        rows: timesheets.map<DataRow>((timesheet) {
+          // final month = DateFormat('MMMM')
+          //     .format(DateTime.parse('${timesheet.month}-01'));
+          // final totalTime = toTime(timesheet.totalTime);
+          // final statusIcon = statuses[timesheet.status] as FaIcon;
           final month = DateFormat('MMMM')
-              .format(DateTime.parse(timesheet['month'] + '-01'));
+              .format(DateTime.parse('${timesheet['month']}-01'));
           final totalTime = toTime(timesheet['totalTime']);
-
-          final backgroundColor =
-              statuses[timesheet['status']]!['color'] as Color;
-          final icon = statuses[timesheet['status']]!['icon'] as FaIcon;
+          final statusIcon = statuses[timesheet['status']] as FaIcon;
 
           return DataRow(cells: <DataCell>[
             DataCell(Text(month)),
             DataCell(Text(totalTime)),
-            DataCell(Chip(
-              backgroundColor: backgroundColor,
-              avatar: icon,
-              label: Text(
-                (timesheet['status'] as String).toLowerCase(),
-                style: const TextStyle(color: Colors.white),
-              ),
-            ))
+            DataCell(statusIcon)
           ]);
         }).toList());
   }
