@@ -7,7 +7,7 @@ fragment TimesheetListItem on Timesheet {
 
 fragment TimesheetDetail on Timesheet {
   ...TimesheetListItem
-  activities {
+  activities(activityIds: $activityIds) {
     id
     customer {
       id

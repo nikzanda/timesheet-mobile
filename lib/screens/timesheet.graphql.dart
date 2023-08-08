@@ -274,6 +274,130 @@ extension ClientExtension$Fragment$TimesheetListItem on graphql.GraphQLClient {
   }
 }
 
+class Variables$Fragment$TimesheetDetail {
+  factory Variables$Fragment$TimesheetDetail({List<String>? activityIds}) =>
+      Variables$Fragment$TimesheetDetail._({
+        if (activityIds != null) r'activityIds': activityIds,
+      });
+
+  Variables$Fragment$TimesheetDetail._(this._$data);
+
+  factory Variables$Fragment$TimesheetDetail.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('activityIds')) {
+      final l$activityIds = data['activityIds'];
+      result$data['activityIds'] =
+          (l$activityIds as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    return Variables$Fragment$TimesheetDetail._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<String>? get activityIds => (_$data['activityIds'] as List<String>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('activityIds')) {
+      final l$activityIds = activityIds;
+      result$data['activityIds'] = l$activityIds?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Fragment$TimesheetDetail<
+          Variables$Fragment$TimesheetDetail>
+      get copyWith => CopyWith$Variables$Fragment$TimesheetDetail(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Fragment$TimesheetDetail) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$activityIds = activityIds;
+    final lOther$activityIds = other.activityIds;
+    if (_$data.containsKey('activityIds') !=
+        other._$data.containsKey('activityIds')) {
+      return false;
+    }
+    if (l$activityIds != null && lOther$activityIds != null) {
+      if (l$activityIds.length != lOther$activityIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$activityIds.length; i++) {
+        final l$activityIds$entry = l$activityIds[i];
+        final lOther$activityIds$entry = lOther$activityIds[i];
+        if (l$activityIds$entry != lOther$activityIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$activityIds != lOther$activityIds) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$activityIds = activityIds;
+    return Object.hashAll([
+      _$data.containsKey('activityIds')
+          ? l$activityIds == null
+              ? null
+              : Object.hashAll(l$activityIds.map((v) => v))
+          : const {}
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Fragment$TimesheetDetail<TRes> {
+  factory CopyWith$Variables$Fragment$TimesheetDetail(
+    Variables$Fragment$TimesheetDetail instance,
+    TRes Function(Variables$Fragment$TimesheetDetail) then,
+  ) = _CopyWithImpl$Variables$Fragment$TimesheetDetail;
+
+  factory CopyWith$Variables$Fragment$TimesheetDetail.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Fragment$TimesheetDetail;
+
+  TRes call({List<String>? activityIds});
+}
+
+class _CopyWithImpl$Variables$Fragment$TimesheetDetail<TRes>
+    implements CopyWith$Variables$Fragment$TimesheetDetail<TRes> {
+  _CopyWithImpl$Variables$Fragment$TimesheetDetail(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Fragment$TimesheetDetail _instance;
+
+  final TRes Function(Variables$Fragment$TimesheetDetail) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? activityIds = _undefined}) =>
+      _then(Variables$Fragment$TimesheetDetail._({
+        ..._instance._$data,
+        if (activityIds != _undefined)
+          'activityIds': (activityIds as List<String>?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Fragment$TimesheetDetail<TRes>
+    implements CopyWith$Variables$Fragment$TimesheetDetail<TRes> {
+  _CopyWithStubImpl$Variables$Fragment$TimesheetDetail(this._res);
+
+  TRes _res;
+
+  call({List<String>? activityIds}) => _res;
+}
+
 class Fragment$TimesheetDetail implements Fragment$TimesheetListItem {
   Fragment$TimesheetDetail({
     required this.id,
@@ -522,7 +646,12 @@ const fragmentDefinitionTimesheetDetail = FragmentDefinitionNode(
     FieldNode(
       name: NameNode(value: 'activities'),
       alias: null,
-      arguments: [],
+      arguments: [
+        ArgumentNode(
+          name: NameNode(value: 'activityIds'),
+          value: VariableNode(name: NameNode(value: 'activityIds')),
+        )
+      ],
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
@@ -666,6 +795,7 @@ extension ClientExtension$Fragment$TimesheetDetail on graphql.GraphQLClient {
   void writeFragment$TimesheetDetail({
     required Fragment$TimesheetDetail data,
     required Map<String, dynamic> idFields,
+    Variables$Fragment$TimesheetDetail? variables,
     bool broadcast = true,
   }) =>
       this.writeFragment(
@@ -675,12 +805,14 @@ extension ClientExtension$Fragment$TimesheetDetail on graphql.GraphQLClient {
             fragmentName: 'TimesheetDetail',
             document: documentNodeFragmentTimesheetDetail,
           ),
+          variables: variables?.toJson() ?? const {},
         ),
         data: data.toJson(),
         broadcast: broadcast,
       );
   Fragment$TimesheetDetail? readFragment$TimesheetDetail({
     required Map<String, dynamic> idFields,
+    Variables$Fragment$TimesheetDetail? variables,
     bool optimistic = true,
   }) {
     final result = this.readFragment(
@@ -690,6 +822,7 @@ extension ClientExtension$Fragment$TimesheetDetail on graphql.GraphQLClient {
           fragmentName: 'TimesheetDetail',
           document: documentNodeFragmentTimesheetDetail,
         ),
+        variables: variables?.toJson() ?? const {},
       ),
       optimistic: optimistic,
     );
