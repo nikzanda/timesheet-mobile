@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:timesheet/screens/timesheet.dart';
+import 'package:timesheet/screens/timesheet_edit.dart';
+import 'package:timesheet/screens/timesheet_list.dart';
 
 String fetchMeQueryString = """
   query Me {
@@ -64,52 +65,12 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MyHomePage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const TimesheetList(),
+          '/timesheet': (context) => const TimesheetEdit()
+        },
       ),
     );
-  }
-}
-
-// class MyHomePage extends StatelessWidget {
-//   const MyHomePage({ Key? key }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('GraphQL Example'),
-//       ),
-//       body: Query(
-//         options: QueryOptions(document: gql(fetchMeQueryString)),
-//         builder: (result, { fetchMore, refetch }) {
-//           // final fetchMeResult = useQuery(
-//           //   QueryOptions(
-//           //     document: gql(fetchMeQueryString)
-//           //   ),
-//           // );
-
-//           // final result = fetchMeResult.result;
-
-//           if (result.hasException) {
-//             return Text(result.exception.toString());
-//           }
-
-//           if (result.isLoading) {
-//             return const Text('Loading');
-//           }
-
-//           return Text(result.data!['me'].toString());
-//         }
-//       ),
-//     );
-//   }
-// }
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const TimesheetList();
   }
 }

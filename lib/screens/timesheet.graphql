@@ -5,10 +5,38 @@ fragment TimesheetListItem on Timesheet {
   totalTime
 }
 
+fragment TimesheetDetail on Timesheet {
+  ...TimesheetListItem
+  activities {
+    id
+    customer {
+      id
+      name
+      color
+    }
+    project {
+      id
+      name
+      color
+      tag
+    }
+    description
+    startTime
+    endTime
+    isActive
+  }
+}
+
 query Timesheets($pageIndex: Int!, $pageSize: Int!, $filter: TimesheetFilter) {
   timesheets(pageIndex: $pageIndex, pageSize: $pageSize, filter: $filter) {
     data {
       ...TimesheetListItem
     }
+  }
+}
+
+query Timesheet($id: ID, $month: String, $activityIds: [ID!]) {
+  timesheet(id: $id, month: $month) {
+    ...TimesheetDetail
   }
 }

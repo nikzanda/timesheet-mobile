@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timesheet/schema.graphql.dart';
 import 'package:timesheet/screens/timesheet.graphql.dart';
+import 'package:timesheet/screens/timesheet_edit.dart';
 import '../helpers/helpers.dart';
 
 class TimesheetList extends StatelessWidget {
@@ -70,21 +71,32 @@ class TimesheetTable extends HookWidget {
           DataColumn(label: Text('Monte ore')),
           DataColumn(label: Text('Stato')),
         ],
-        rows: timesheets.map<DataRow>((timesheet) {
-          // final month = DateFormat('MMMM')
-          //     .format(DateTime.parse('${timesheet.month}-01'));
-          // final totalTime = toTime(timesheet.totalTime);
-          // final statusIcon = statuses[timesheet.status] as FaIcon;
-          final month = DateFormat('MMMM')
-              .format(DateTime.parse('${timesheet['month']}-01'));
-          final totalTime = toTime(timesheet['totalTime']);
-          final statusIcon = statuses[timesheet['status']] as FaIcon;
+        rows: timesheets.map<DataRow>(
+          (timesheet) {
+            // final month = DateFormat('MMMM')
+            //     .format(DateTime.parse('${timesheet.month}-01'));
+            // final totalTime = toTime(timesheet.totalTime);
+            // final statusIcon = statuses[timesheet.status] as FaIcon;
+            final month = DateFormat('MMMM')
+                .format(DateTime.parse('${timesheet['month']}-01'));
+            final totalTime = toTime(timesheet['totalTime']);
+            final statusIcon = statuses[timesheet['status']] as FaIcon;
 
-          return DataRow(cells: <DataCell>[
-            DataCell(Text(month)),
-            DataCell(Text(totalTime)),
-            DataCell(statusIcon)
-          ]);
-        }).toList());
+            return DataRow(
+              cells: <DataCell>[
+                DataCell(Text(month)),
+                DataCell(Text(totalTime)),
+                DataCell(statusIcon)
+              ],
+              onSelectChanged: (selected) {
+                if (selected != null && selected) {
+                  Navigator.pushNamed(context, '/timesheet',
+                      arguments:
+                          TimesheetEditArguments(timesheet['id'] as String));
+                }
+              },
+            );
+          },
+        ).toList());
   }
 }
