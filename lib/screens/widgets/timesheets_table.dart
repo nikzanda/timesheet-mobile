@@ -51,6 +51,8 @@ class TimesheetTable extends HookWidget {
     final timesheets = result.result.data!['timesheets']['data'];
 
     return DataTable(
+        showCheckboxColumn: false,
+        showBottomBorder: true,
         columns: const <DataColumn>[
           DataColumn(label: Text('Mese')),
           DataColumn(label: Text('Monte ore')),

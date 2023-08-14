@@ -19,8 +19,7 @@ class TimesheetEdit extends HookWidget {
     final timesheetId = args.timesheetId;
 
     final result = useQuery$Timesheet(Options$Query$Timesheet(
-      variables: Variables$Query$Timesheet(id: timesheetId)
-    ));
+        variables: Variables$Query$Timesheet(id: timesheetId)));
 
     if (result.result.hasException) {
       return Text(result.result.exception.toString());
@@ -30,17 +29,31 @@ class TimesheetEdit extends HookWidget {
       return const CircularProgressIndicator();
     }
 
-    // final timesheet = result.result.data!['timesheet'] as Fragment$TimesheetDetail;
-    final timesheet = result.result.data!['timesheet'];
-
-    final month = DateFormat('MMMM yyyy').format(DateTime.parse('${timesheet['month']}-01'));
-    // final month = DateFormat('MMMM').format(DateTime.parse('${timesheet.month}-01'));
+    final timesheet =
+        Fragment$TimesheetDetail.fromJson(result.result.data!['timesheet']);
+    final month =
+        DateFormat('MMMM yyyy').format(DateTime.parse('${timesheet.month}-01'));
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(month),
-      ),
-      body: Text(timesheet.toString())
-    );
+        appBar: AppBar(
+          title: Text(month),
+        ),
+        body: ListView.builder(
+          itemCount: timesheet.activities.length,
+          itemBuilder: (context, index) {
+            final activity = timesheet.activities[index];
+
+            final from = DateFormat('dd MMMM HH:mm').format(
+                DateTime.fromMillisecondsSinceEpoch(
+                    activity.startTime.toInt()));
+            final to = DateFormat('HH:mm').format(
+                DateTime.fromMillisecondsSinceEpoch(activity.endTime!.toInt()));
+
+            // Text(activity.description ?? '')
+            return ListTile(
+                title: Text('$from - $to'),
+                subtitle: Text(activity.description ?? ''));
+          },
+        ));
   }
 }
