@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:timesheet/screens/activity_create.dart';
 import 'package:timesheet/screens/timesheet_edit.dart';
 import 'package:timesheet/screens/timesheet_list.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final HttpLink httpLink = HttpLink('http://192.168.1.4:4001/graphql');
+    final HttpLink httpLink = HttpLink('http://192.168.1.6:4001/graphql');
     // final HttpLink httpLink = HttpLink('http://10.0.2.2:4001/graphql');
 
     final AuthLink authLink = AuthLink(
@@ -54,7 +54,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const TimesheetList(),
-          '/timesheet': (context) => const TimesheetEdit()
+          '/timesheet': (context) => const TimesheetEdit(),
+          '/timesheet/activity/new': (context) => const ActivityCreate(),
         },
       ),
     );

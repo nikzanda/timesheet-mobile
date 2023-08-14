@@ -2667,3 +2667,726 @@ class Query$Timesheet$Widget extends graphql_flutter.Query<Query$Timesheet> {
           builder: builder,
         );
 }
+
+class Variables$Mutation$ActivitiesCreate {
+  factory Variables$Mutation$ActivitiesCreate({
+    required Input$ActivitiesCreateInput input,
+    List<String>? activityIds,
+  }) =>
+      Variables$Mutation$ActivitiesCreate._({
+        r'input': input,
+        if (activityIds != null) r'activityIds': activityIds,
+      });
+
+  Variables$Mutation$ActivitiesCreate._(this._$data);
+
+  factory Variables$Mutation$ActivitiesCreate.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$ActivitiesCreateInput.fromJson((l$input as Map<String, dynamic>));
+    if (data.containsKey('activityIds')) {
+      final l$activityIds = data['activityIds'];
+      result$data['activityIds'] =
+          (l$activityIds as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    return Variables$Mutation$ActivitiesCreate._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$ActivitiesCreateInput get input =>
+      (_$data['input'] as Input$ActivitiesCreateInput);
+  List<String>? get activityIds => (_$data['activityIds'] as List<String>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    if (_$data.containsKey('activityIds')) {
+      final l$activityIds = activityIds;
+      result$data['activityIds'] = l$activityIds?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$ActivitiesCreate<
+          Variables$Mutation$ActivitiesCreate>
+      get copyWith => CopyWith$Variables$Mutation$ActivitiesCreate(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$ActivitiesCreate) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    final l$activityIds = activityIds;
+    final lOther$activityIds = other.activityIds;
+    if (_$data.containsKey('activityIds') !=
+        other._$data.containsKey('activityIds')) {
+      return false;
+    }
+    if (l$activityIds != null && lOther$activityIds != null) {
+      if (l$activityIds.length != lOther$activityIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$activityIds.length; i++) {
+        final l$activityIds$entry = l$activityIds[i];
+        final lOther$activityIds$entry = lOther$activityIds[i];
+        if (l$activityIds$entry != lOther$activityIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$activityIds != lOther$activityIds) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    final l$activityIds = activityIds;
+    return Object.hashAll([
+      l$input,
+      _$data.containsKey('activityIds')
+          ? l$activityIds == null
+              ? null
+              : Object.hashAll(l$activityIds.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$ActivitiesCreate<TRes> {
+  factory CopyWith$Variables$Mutation$ActivitiesCreate(
+    Variables$Mutation$ActivitiesCreate instance,
+    TRes Function(Variables$Mutation$ActivitiesCreate) then,
+  ) = _CopyWithImpl$Variables$Mutation$ActivitiesCreate;
+
+  factory CopyWith$Variables$Mutation$ActivitiesCreate.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$ActivitiesCreate;
+
+  TRes call({
+    Input$ActivitiesCreateInput? input,
+    List<String>? activityIds,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$ActivitiesCreate<TRes>
+    implements CopyWith$Variables$Mutation$ActivitiesCreate<TRes> {
+  _CopyWithImpl$Variables$Mutation$ActivitiesCreate(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$ActivitiesCreate _instance;
+
+  final TRes Function(Variables$Mutation$ActivitiesCreate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? input = _undefined,
+    Object? activityIds = _undefined,
+  }) =>
+      _then(Variables$Mutation$ActivitiesCreate._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$ActivitiesCreateInput),
+        if (activityIds != _undefined)
+          'activityIds': (activityIds as List<String>?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$ActivitiesCreate<TRes>
+    implements CopyWith$Variables$Mutation$ActivitiesCreate<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$ActivitiesCreate(this._res);
+
+  TRes _res;
+
+  call({
+    Input$ActivitiesCreateInput? input,
+    List<String>? activityIds,
+  }) =>
+      _res;
+}
+
+class Mutation$ActivitiesCreate {
+  Mutation$ActivitiesCreate({
+    required this.activitiesCreate,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$ActivitiesCreate.fromJson(Map<String, dynamic> json) {
+    final l$activitiesCreate = json['activitiesCreate'];
+    final l$$__typename = json['__typename'];
+    return Mutation$ActivitiesCreate(
+      activitiesCreate: Mutation$ActivitiesCreate$activitiesCreate.fromJson(
+          (l$activitiesCreate as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$ActivitiesCreate$activitiesCreate activitiesCreate;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$activitiesCreate = activitiesCreate;
+    _resultData['activitiesCreate'] = l$activitiesCreate.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$activitiesCreate = activitiesCreate;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$activitiesCreate,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$ActivitiesCreate) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$activitiesCreate = activitiesCreate;
+    final lOther$activitiesCreate = other.activitiesCreate;
+    if (l$activitiesCreate != lOther$activitiesCreate) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$ActivitiesCreate
+    on Mutation$ActivitiesCreate {
+  CopyWith$Mutation$ActivitiesCreate<Mutation$ActivitiesCreate> get copyWith =>
+      CopyWith$Mutation$ActivitiesCreate(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$ActivitiesCreate<TRes> {
+  factory CopyWith$Mutation$ActivitiesCreate(
+    Mutation$ActivitiesCreate instance,
+    TRes Function(Mutation$ActivitiesCreate) then,
+  ) = _CopyWithImpl$Mutation$ActivitiesCreate;
+
+  factory CopyWith$Mutation$ActivitiesCreate.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$ActivitiesCreate;
+
+  TRes call({
+    Mutation$ActivitiesCreate$activitiesCreate? activitiesCreate,
+    String? $__typename,
+  });
+  CopyWith$Mutation$ActivitiesCreate$activitiesCreate<TRes>
+      get activitiesCreate;
+}
+
+class _CopyWithImpl$Mutation$ActivitiesCreate<TRes>
+    implements CopyWith$Mutation$ActivitiesCreate<TRes> {
+  _CopyWithImpl$Mutation$ActivitiesCreate(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$ActivitiesCreate _instance;
+
+  final TRes Function(Mutation$ActivitiesCreate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? activitiesCreate = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$ActivitiesCreate(
+        activitiesCreate: activitiesCreate == _undefined ||
+                activitiesCreate == null
+            ? _instance.activitiesCreate
+            : (activitiesCreate as Mutation$ActivitiesCreate$activitiesCreate),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Mutation$ActivitiesCreate$activitiesCreate<TRes>
+      get activitiesCreate {
+    final local$activitiesCreate = _instance.activitiesCreate;
+    return CopyWith$Mutation$ActivitiesCreate$activitiesCreate(
+        local$activitiesCreate, (e) => call(activitiesCreate: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$ActivitiesCreate<TRes>
+    implements CopyWith$Mutation$ActivitiesCreate<TRes> {
+  _CopyWithStubImpl$Mutation$ActivitiesCreate(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$ActivitiesCreate$activitiesCreate? activitiesCreate,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Mutation$ActivitiesCreate$activitiesCreate<TRes>
+      get activitiesCreate =>
+          CopyWith$Mutation$ActivitiesCreate$activitiesCreate.stub(_res);
+}
+
+const documentNodeMutationActivitiesCreate = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'ActivitiesCreate'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ActivitiesCreateInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'activityIds')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'ID'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'activitiesCreate'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'timesheet'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'TimesheetDetail'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+  fragmentDefinitionTimesheetDetail,
+  fragmentDefinitionTimesheetListItem,
+]);
+Mutation$ActivitiesCreate _parserFn$Mutation$ActivitiesCreate(
+        Map<String, dynamic> data) =>
+    Mutation$ActivitiesCreate.fromJson(data);
+typedef OnMutationCompleted$Mutation$ActivitiesCreate = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Mutation$ActivitiesCreate?,
+);
+
+class Options$Mutation$ActivitiesCreate
+    extends graphql.MutationOptions<Mutation$ActivitiesCreate> {
+  Options$Mutation$ActivitiesCreate({
+    String? operationName,
+    required Variables$Mutation$ActivitiesCreate variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$ActivitiesCreate? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$ActivitiesCreate? onCompleted,
+    graphql.OnMutationUpdate<Mutation$ActivitiesCreate>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ActivitiesCreate(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationActivitiesCreate,
+          parserFn: _parserFn$Mutation$ActivitiesCreate,
+        );
+
+  final OnMutationCompleted$Mutation$ActivitiesCreate? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+class WatchOptions$Mutation$ActivitiesCreate
+    extends graphql.WatchQueryOptions<Mutation$ActivitiesCreate> {
+  WatchOptions$Mutation$ActivitiesCreate({
+    String? operationName,
+    required Variables$Mutation$ActivitiesCreate variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$ActivitiesCreate? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationActivitiesCreate,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$ActivitiesCreate,
+        );
+}
+
+extension ClientExtension$Mutation$ActivitiesCreate on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$ActivitiesCreate>>
+      mutate$ActivitiesCreate(
+              Options$Mutation$ActivitiesCreate options) async =>
+          await this.mutate(options);
+  graphql.ObservableQuery<Mutation$ActivitiesCreate>
+      watchMutation$ActivitiesCreate(
+              WatchOptions$Mutation$ActivitiesCreate options) =>
+          this.watchMutation(options);
+}
+
+class Mutation$ActivitiesCreate$HookResult {
+  Mutation$ActivitiesCreate$HookResult(
+    this.runMutation,
+    this.result,
+  );
+
+  final RunMutation$Mutation$ActivitiesCreate runMutation;
+
+  final graphql.QueryResult<Mutation$ActivitiesCreate> result;
+}
+
+Mutation$ActivitiesCreate$HookResult useMutation$ActivitiesCreate(
+    [WidgetOptions$Mutation$ActivitiesCreate? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$ActivitiesCreate());
+  return Mutation$ActivitiesCreate$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$ActivitiesCreate>
+    useWatchMutation$ActivitiesCreate(
+            WatchOptions$Mutation$ActivitiesCreate options) =>
+        graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$ActivitiesCreate
+    extends graphql.MutationOptions<Mutation$ActivitiesCreate> {
+  WidgetOptions$Mutation$ActivitiesCreate({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$ActivitiesCreate? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$ActivitiesCreate? onCompleted,
+    graphql.OnMutationUpdate<Mutation$ActivitiesCreate>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ActivitiesCreate(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationActivitiesCreate,
+          parserFn: _parserFn$Mutation$ActivitiesCreate,
+        );
+
+  final OnMutationCompleted$Mutation$ActivitiesCreate? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+typedef RunMutation$Mutation$ActivitiesCreate
+    = graphql.MultiSourceResult<Mutation$ActivitiesCreate> Function(
+  Variables$Mutation$ActivitiesCreate, {
+  Object? optimisticResult,
+  Mutation$ActivitiesCreate? typedOptimisticResult,
+});
+typedef Builder$Mutation$ActivitiesCreate = widgets.Widget Function(
+  RunMutation$Mutation$ActivitiesCreate,
+  graphql.QueryResult<Mutation$ActivitiesCreate>?,
+);
+
+class Mutation$ActivitiesCreate$Widget
+    extends graphql_flutter.Mutation<Mutation$ActivitiesCreate> {
+  Mutation$ActivitiesCreate$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$ActivitiesCreate? options,
+    required Builder$Mutation$ActivitiesCreate builder,
+  }) : super(
+          key: key,
+          options: options ?? WidgetOptions$Mutation$ActivitiesCreate(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            (
+              variables, {
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables.toJson(),
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
+}
+
+class Mutation$ActivitiesCreate$activitiesCreate {
+  Mutation$ActivitiesCreate$activitiesCreate({
+    required this.timesheet,
+    this.$__typename = 'ActivitiesCreatePayload',
+  });
+
+  factory Mutation$ActivitiesCreate$activitiesCreate.fromJson(
+      Map<String, dynamic> json) {
+    final l$timesheet = json['timesheet'];
+    final l$$__typename = json['__typename'];
+    return Mutation$ActivitiesCreate$activitiesCreate(
+      timesheet: Fragment$TimesheetDetail.fromJson(
+          (l$timesheet as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$TimesheetDetail timesheet;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$timesheet = timesheet;
+    _resultData['timesheet'] = l$timesheet.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$timesheet = timesheet;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$timesheet,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$ActivitiesCreate$activitiesCreate) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$timesheet = timesheet;
+    final lOther$timesheet = other.timesheet;
+    if (l$timesheet != lOther$timesheet) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$ActivitiesCreate$activitiesCreate
+    on Mutation$ActivitiesCreate$activitiesCreate {
+  CopyWith$Mutation$ActivitiesCreate$activitiesCreate<
+          Mutation$ActivitiesCreate$activitiesCreate>
+      get copyWith => CopyWith$Mutation$ActivitiesCreate$activitiesCreate(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$ActivitiesCreate$activitiesCreate<TRes> {
+  factory CopyWith$Mutation$ActivitiesCreate$activitiesCreate(
+    Mutation$ActivitiesCreate$activitiesCreate instance,
+    TRes Function(Mutation$ActivitiesCreate$activitiesCreate) then,
+  ) = _CopyWithImpl$Mutation$ActivitiesCreate$activitiesCreate;
+
+  factory CopyWith$Mutation$ActivitiesCreate$activitiesCreate.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$ActivitiesCreate$activitiesCreate;
+
+  TRes call({
+    Fragment$TimesheetDetail? timesheet,
+    String? $__typename,
+  });
+  CopyWith$Fragment$TimesheetDetail<TRes> get timesheet;
+}
+
+class _CopyWithImpl$Mutation$ActivitiesCreate$activitiesCreate<TRes>
+    implements CopyWith$Mutation$ActivitiesCreate$activitiesCreate<TRes> {
+  _CopyWithImpl$Mutation$ActivitiesCreate$activitiesCreate(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$ActivitiesCreate$activitiesCreate _instance;
+
+  final TRes Function(Mutation$ActivitiesCreate$activitiesCreate) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? timesheet = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$ActivitiesCreate$activitiesCreate(
+        timesheet: timesheet == _undefined || timesheet == null
+            ? _instance.timesheet
+            : (timesheet as Fragment$TimesheetDetail),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Fragment$TimesheetDetail<TRes> get timesheet {
+    final local$timesheet = _instance.timesheet;
+    return CopyWith$Fragment$TimesheetDetail(
+        local$timesheet, (e) => call(timesheet: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$ActivitiesCreate$activitiesCreate<TRes>
+    implements CopyWith$Mutation$ActivitiesCreate$activitiesCreate<TRes> {
+  _CopyWithStubImpl$Mutation$ActivitiesCreate$activitiesCreate(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment$TimesheetDetail? timesheet,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Fragment$TimesheetDetail<TRes> get timesheet =>
+      CopyWith$Fragment$TimesheetDetail.stub(_res);
+}

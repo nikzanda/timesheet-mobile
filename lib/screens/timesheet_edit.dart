@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:timesheet/screens/activity_create.dart';
 import 'package:timesheet/screens/timesheet.graphql.dart';
 
 class TimesheetEditArguments {
@@ -38,6 +39,14 @@ class TimesheetEdit extends HookWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(month),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/timesheet/activity/new',
+                      arguments: ActivityCreateArguments(timesheet));
+                },
+                icon: const FaIcon(FontAwesomeIcons.plus))
+          ],
         ),
         body: ListView.builder(
           itemCount: timesheet.activities.length,
@@ -118,8 +127,6 @@ class TimesheetEdit extends HookWidget {
 
             return ListTile(
               title: Text('$from - $to'),
-              // subtitle: Text(activity.description ?? ''));
-              // subtitle: Text('${activity.customer!.name}\n${activity.project!.name}\n${activity.description ?? ''}'));
               subtitle: subtitle.isNotEmpty
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
