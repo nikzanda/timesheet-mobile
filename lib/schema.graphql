@@ -1,0 +1,466 @@
+input ActivitiesCreateInput {
+  timesheetId: ID!
+  activities: [ActivityCreateInput!]!
+}
+
+type ActivitiesCreatePayload {
+  timesheet: Timesheet!
+}
+
+input ActivitiesDeleteInput {
+  timesheetId: ID!
+  activitiesIds: [ID!]!
+}
+
+type ActivitiesDeletePayload {
+  timesheet: Timesheet!
+}
+
+input ActivitiesUpdateInput {
+  timesheetId: ID!
+  activities: [ActivityUpdateInput!]!
+}
+
+type ActivitiesUpdatePayload {
+  timesheet: Timesheet!
+}
+
+type Activity {
+  id: ID!
+  customer: Customer
+  project: Project
+  description: String
+  startTime: Float!
+  endTime: Float
+  isActive: Boolean
+  createdAt: Float
+  updatedAt: Float
+}
+
+input ActivityCreateInput {
+  customerId: ID
+  projectId: ID
+  description: String
+  startTime: Float!
+  endTime: Float
+}
+
+input ActivityUpdateInput {
+  id: ID!
+  customerId: ID
+  projectId: ID
+  description: String
+  startTime: Float
+  endTime: Float
+}
+
+input AuthenticationLoginInput {
+  email: String!
+  password: String!
+}
+
+type AuthenticationLoginPayload {
+  user: User!
+  token: String!
+}
+
+type CanDelete {
+  model: String!
+  count: Int!
+}
+
+type Customer {
+  id: ID!
+  name: String!
+  color: HexColorCode
+  projects: [Project!]!
+  isActive: Boolean!
+  createdAt: Float
+  updatedAt: Float
+  canDelete: [CanDelete!]!
+}
+
+input CustomerCreateInput {
+  name: String!
+  color: HexColorCode
+  projectsIds: [ID!]
+}
+
+type CustomerCreatePayload {
+  customer: Customer!
+}
+
+input CustomerDeleteInput {
+  id: ID!
+}
+
+type CustomerDeletePayload {
+  customer: Customer!
+}
+
+input CustomerFilter {
+  ids: [ID!]
+  name: String
+  projectsIds: [ID!]
+  isActive: Boolean
+  sortBy: CustomerSortEnum
+  sortDirection: SortDirectionEnum
+}
+
+type CustomerPagination {
+  data: [Customer!]!
+  pageInfo: PageInfo!
+}
+
+enum CustomerSettingEnum {
+  HIDDEN
+  VISIBLE
+  REQUIRED
+}
+
+enum CustomerSortEnum {
+  NAME
+  CREATED_AT
+}
+
+type CustomerStatistic {
+  customer: Customer!
+  value: Float!
+}
+
+input CustomerUpdateInput {
+  id: ID!
+  name: String
+  color: HexColorCode
+  projectsIds: [ID!]
+  isActive: Boolean
+}
+
+type CustomerUpdatePayload {
+  customer: Customer!
+}
+
+scalar HexColorCode
+
+type MonthStatistic {
+  month: String!
+  value: Float!
+}
+
+type Mutation {
+  authenticationLogin(input: AuthenticationLoginInput!): AuthenticationLoginPayload!
+  organizationCreate(input: OrganizationCreateInput!): OrganizationCreatePayload!
+  organizationDelete(input: OrganizationDeleteInput!): OrganizationDeletePayload!
+  organizationUpdate(input: OrganizationUpdateInput!): OrganizationUpdatePayload!
+  userCreate(input: UserCreateInput!): UserCreatePayload!
+  userDelete(input: UserDeleteInput!): UserDeletePayload!
+  userUpdate(input: UserUpdateInput!): UserUpdatePayload!
+  activitiesCreate(input: ActivitiesCreateInput!): ActivitiesCreatePayload!
+  activitiesDelete(input: ActivitiesDeleteInput!): ActivitiesDeletePayload!
+  activitiesUpdate(input: ActivitiesUpdateInput!): ActivitiesUpdatePayload!
+  customerCreate(input: CustomerCreateInput!): CustomerCreatePayload!
+  customerDelete(input: CustomerDeleteInput!): CustomerDeletePayload!
+  customerUpdate(input: CustomerUpdateInput!): CustomerUpdatePayload!
+  projectCreate(input: ProjectCreateInput!): ProjectCreatePayload!
+  projectDelete(input: ProjectDeleteInput!): ProjectDeletePayload!
+  projectUpdate(input: ProjectUpdateInput!): ProjectUpdatePayload!
+  settingUpdate(input: SettingUpdateInput!): SettingUpdatePayload!
+  timesheetCreate(input: TimesheetCreateInput!): TimesheetCreatePayload!
+  timesheetUpdate(input: TimesheetUpdateInput!): TimesheetUpdatePayload!
+}
+
+type Organization {
+  id: ID!
+  name: String!
+  createdAt: Float
+  users: [User!]!
+  timesheetSettings: Setting!
+}
+
+input OrganizationCreateInput {
+  name: String!
+}
+
+type OrganizationCreatePayload {
+  organization: Organization!
+}
+
+input OrganizationDeleteInput {
+  id: ID!
+}
+
+type OrganizationDeletePayload {
+  organization: Organization!
+}
+
+input OrganizationFilter {
+  name: String
+  sortBy: OrganizationSortEnum
+  sortDirection: SortDirectionEnum
+}
+
+type OrganizationPagination {
+  data: [Organization!]!
+  pageInfo: PageInfo!
+}
+
+enum OrganizationSortEnum {
+  NAME
+}
+
+input OrganizationUpdateInput {
+  id: ID!
+  name: String
+}
+
+type OrganizationUpdatePayload {
+  organization: Organization!
+}
+
+type PageInfo {
+  total: Int!
+}
+
+type Project {
+  id: ID!
+  name: String!
+  color: HexColorCode
+  status: ProjectStatusEnum!
+  description: String
+  tag: String
+  customers: [Customer!]!
+  createdAt: Float
+  updatedAt: Float
+  canDelete: [CanDelete!]!
+}
+
+input ProjectCreateInput {
+  name: String!
+  color: HexColorCode
+  description: String
+  tag: String
+}
+
+type ProjectCreatePayload {
+  project: Project!
+}
+
+input ProjectDeleteInput {
+  id: ID!
+}
+
+type ProjectDeletePayload {
+  project: Project!
+}
+
+input ProjectFilter {
+  ids: [ID!]
+  name: String
+  status: [ProjectStatusEnum!]
+  tag: [String!]
+  sortBy: ProjectSortEnum
+  sortDirection: SortDirectionEnum
+}
+
+type ProjectPagination {
+  data: [Project!]!
+  pageInfo: PageInfo!
+}
+
+enum ProjectSettingEnum {
+  HIDDEN
+  VISIBLE
+  REQUIRED
+}
+
+enum ProjectSortEnum {
+  NAME
+  CREATED_AT
+}
+
+type ProjectStatistic {
+  project: Project!
+  value: Float!
+}
+
+enum ProjectStatusEnum {
+  IN_PROGRESS
+  COMPLETED
+}
+
+input ProjectUpdateInput {
+  id: ID!
+  name: String
+  color: HexColorCode
+  status: ProjectStatusEnum
+  description: String
+  tag: String
+}
+
+type ProjectUpdatePayload {
+  project: Project!
+}
+
+type Query {
+  me: User!
+  organizations(pageIndex: Int!, pageSize: Int!, filter: OrganizationFilter): OrganizationPagination!
+  organization(id: ID!): Organization!
+  users(pageIndex: Int!, pageSize: Int!, filter: UserFilter): UserPagination!
+  user(id: ID!): User!
+  timesheets(pageIndex: Int!, pageSize: Int!, filter: TimesheetFilter): TimesheetPagination!
+  timesheet(id: ID, month: String): Timesheet!
+  years: [Int!]!
+  customers(pageIndex: Int!, pageSize: Int!, filter: CustomerFilter): CustomerPagination!
+  customer(id: ID!): Customer!
+  projects(pageIndex: Int!, pageSize: Int!, filter: ProjectFilter): ProjectPagination!
+  project(id: ID!): Project!
+  tags(text: String): [String!]!
+  statisticsByTag: [TagStatistic!]!
+  statisticsByCustomer: [CustomerStatistic!]!
+  statisticsByProject: [ProjectStatistic!]!
+  statisticsByMonth: [MonthStatistic!]!
+}
+
+type Setting {
+  id: ID!
+  organization: Organization!
+  customer: CustomerSettingEnum!
+  project: ProjectSettingEnum!
+}
+
+input SettingUpdateInput {
+  id: ID!
+  customer: CustomerSettingEnum
+  project: ProjectSettingEnum
+}
+
+type SettingUpdatePayload {
+  setting: Setting!
+}
+
+enum SortDirectionEnum {
+  ASC
+  DESC
+}
+
+type TagStatistic {
+  tag: String!
+  value: Float!
+}
+
+type Timesheet {
+  id: ID!
+  user: User!
+  month: String!
+  status: TimesheetStatusEnum!
+  totalTime: Int!
+  activities(activityIds: [ID!]): [Activity!]!
+}
+
+input TimesheetCreateInput {
+  month: String!
+  activities: [ActivityCreateInput!]
+}
+
+type TimesheetCreatePayload {
+  timesheet: Timesheet!
+}
+
+input TimesheetFilter {
+  ids: [ID!]
+  year: String
+  month: String
+  fromMonth: String
+  toMonth: String
+  status: [TimesheetStatusEnum]
+  sortBy: TimesheetSortEnum
+  sortDirection: SortDirectionEnum
+}
+
+type TimesheetPagination {
+  data: [Timesheet!]!
+  pageInfo: PageInfo!
+}
+
+enum TimesheetSortEnum {
+  MONTH
+  STATUS
+  TOTAL_HOURS
+}
+
+enum TimesheetStatusEnum {
+  OPEN
+  PENDING
+  REJECTED
+  CLOSED
+}
+
+input TimesheetUpdateInput {
+  id: ID!
+  status: TimesheetStatusEnum
+  activities: [ActivityCreateInput!]
+}
+
+type TimesheetUpdatePayload {
+  timesheet: Timesheet!
+}
+
+type User {
+  id: ID!
+  email: String!
+  displayName: String!
+  isAdmin: Boolean!
+  organization: Organization!
+  createdAt: Float
+  timesheets: [Timesheet!]!
+  currentTimesheet: Timesheet!
+}
+
+input UserCreateInput {
+  displayName: String!
+  email: String!
+  password: String!
+  organizationId: ID
+}
+
+type UserCreatePayload {
+  user: User!
+}
+
+input UserDeleteInput {
+  id: ID!
+}
+
+type UserDeletePayload {
+  user: User!
+}
+
+input UserFilter {
+  search: String
+  displayName: String
+  email: String
+  organizationId: [ID!]
+  sortBy: UserSortEnum
+  sortDirection: SortDirectionEnum
+}
+
+type UserPagination {
+  data: [User!]!
+  pageInfo: PageInfo!
+}
+
+enum UserSortEnum {
+  DISPLAY_NAME
+  EMAIL
+}
+
+input UserUpdateInput {
+  id: ID!
+  displayName: String!
+  password: String
+  email: String!
+}
+
+type UserUpdatePayload {
+  user: User!
+}
