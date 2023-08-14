@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timesheet/screens/timesheet.graphql.dart';
 
@@ -49,10 +50,83 @@ class TimesheetEdit extends HookWidget {
             final to = DateFormat('HH:mm').format(
                 DateTime.fromMillisecondsSinceEpoch(activity.endTime!.toInt()));
 
-            // Text(activity.description ?? '')
+            final List<RichText> subtitle = [];
+
+            if (activity.customer != null) {
+              final customer = activity.customer!;
+
+              final String hexString =
+                  customer.color != null ? customer.color! : '#000000';
+              final hex = hexString.replaceAll('#', '');
+              final int colorInt = int.parse(hex, radix: 16);
+              final Color color = Color(colorInt).withOpacity(1.0);
+
+              subtitle.add(RichText(
+                  text: TextSpan(
+                      text: 'Cliente: ',
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                    TextSpan(
+                        text: customer.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        children: [
+                          WidgetSpan(
+                              child: FaIcon(
+                            FontAwesomeIcons.solidCircle,
+                            color: color,
+                            size: 10,
+                          ))
+                        ])
+                  ])));
+            }
+
+            if (activity.project != null) {
+              final project = activity.project!;
+
+              final String hexString =
+                  project.color != null ? project.color! : '#000000';
+              final hex = hexString.replaceAll('#', '');
+              final int colorInt = int.parse(hex, radix: 16);
+              final Color color = Color(colorInt).withOpacity(1.0);
+
+              subtitle.add(RichText(
+                  text: TextSpan(
+                      text: 'Progetto: ',
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                    TextSpan(
+                        text: project.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        children: [
+                          WidgetSpan(
+                              child: FaIcon(
+                            FontAwesomeIcons.solidCircle,
+                            color: color,
+                            size: 10,
+                          ))
+                        ])
+                  ])));
+            }
+
+            if (activity.description != null && activity.description != '') {
+              subtitle.add(RichText(
+                  text: TextSpan(
+                text: activity.description,
+                style: const TextStyle(color: Colors.grey),
+              )));
+            }
+
             return ListTile(
-                title: Text('$from - $to'),
-                subtitle: Text(activity.description ?? ''));
+              title: Text('$from - $to'),
+              // subtitle: Text(activity.description ?? ''));
+              // subtitle: Text('${activity.customer!.name}\n${activity.project!.name}\n${activity.description ?? ''}'));
+              subtitle: subtitle.isNotEmpty
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: subtitle,
+                    )
+                  : null,
+            );
           },
         ));
   }
