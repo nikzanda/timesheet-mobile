@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final HttpLink httpLink = HttpLink('http://192.168.1.6:4001/graphql');
+    final HttpLink httpLink = HttpLink('http://192.168.1.4:4001/graphql');
     // final HttpLink httpLink = HttpLink('http://10.0.2.2:4001/graphql');
 
     final AuthLink authLink = AuthLink(

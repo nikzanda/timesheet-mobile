@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:time_range_picker/time_range_picker.dart';
 import 'package:timesheet/schema.graphql.dart';
 import 'package:timesheet/screens/timesheet.graphql.dart';
+import 'package:timesheet/helpers/date_utils.dart';
 
 class ActivityCreateArguments {
   final Fragment$TimesheetDetail timesheet;
@@ -18,6 +20,8 @@ class ActivityCreate extends StatefulHookWidget {
 
 class _ActivityCreateState extends State<ActivityCreate> {
   final descriptionController = TextEditingController();
+  DateTime? selectedDate = DateTime.now();
+  TimeRange? selectedTimeRange;
 
   @override
   void dispose() {
@@ -63,6 +67,44 @@ class _ActivityCreateState extends State<ActivityCreate> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Date picker
+                  ListTile(
+                    title: Text(selectedDate == null
+                        ? 'Select Date'
+                        : 'Selected Date: ${selectedDate!.toLocal()}'),
+                    onTap: () async {
+                      final month = DateTime.parse('${timesheet.month}-01');
+
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate:
+                            DateTime.now(), // TODO: initialDate month != now
+                        firstDate: DateTime(month.year, month.month, 1),
+                        lastDate: DateTime(month.year, month.month + 1, 0),
+                      );
+                      if (picked != null && picked != selectedDate) {
+                        setState(() {
+                          selectedDate = picked;
+                        });
+                      }
+                    },
+                  ),
+                  // Time range picker
+                  ListTile(
+                    title: Text(selectedTimeRange == null
+                        ? 'Select Time Range'
+                        : 'Selected Time Range: ${selectedTimeRange!.startTime.format(context)} - ${selectedTimeRange!.endTime.format(context)}'),
+                    onTap: () async {
+                      final TimeRange? result = await showTimeRangePicker(
+                        context: context,
+                      );
+                      if (result != null) {
+                        setState(() {
+                          selectedTimeRange = result;
+                        });
+                      }
+                    },
+                  ),
                   TextFormField(
                     // The validator receives the text that the user has entered.
                     validator: (value) {
@@ -80,15 +122,13 @@ class _ActivityCreateState extends State<ActivityCreate> {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: ElevatedButton(
                       onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
                         if (formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-
-                          DateTime startTime =
-                              DateTime(2023, 8, 14, 19, 0, 0, 0, 0);
-                          DateTime endTime =
-                              DateTime(2023, 8, 14, 20, 0, 0, 0, 0);
+                          DateTime startTime = selectedDate!.copyWith(
+                              hour: selectedTimeRange!.startTime.hour,
+                              minute: selectedTimeRange!.startTime.minute);
+                          DateTime endTime = selectedDate!.copyWith(
+                              hour: selectedTimeRange!.endTime.hour,
+                              minute: selectedTimeRange!.endTime.minute);
 
                           List<Input$ActivityCreateInput> activities = [
                             Input$ActivityCreateInput(
