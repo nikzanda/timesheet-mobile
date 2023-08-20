@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:timesheet/screens/widgets/timesheets_table.dart';
+import 'widgets/timesheets_table.dart';
+
 
 class TimesheetList extends StatelessWidget {
   const TimesheetList({super.key});

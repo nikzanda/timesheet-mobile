@@ -1,5 +1,5 @@
 // ignore_for_file: type=lint
-import '../schema.graphql.dart';
+import '../../schema.graphql.dart';
 import 'dart:async';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 import 'package:timesheet/schema.graphql.dart';
-import 'package:timesheet/screens/timesheet.graphql.dart';
 import 'package:timesheet/helpers/date_utils.dart';
+import 'package:timesheet/screens/timesheets/timesheet.graphql.dart';
 
 class ActivityCreateArguments {
   final Fragment$TimesheetDetail timesheet;

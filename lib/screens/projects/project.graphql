@@ -1,0 +1,8 @@
+query ProjectSearcher($filter: ProjectFilter) {
+  projects(pageIndex: 0, pageSize: 0, filter: $filter) {
+    data {
+      id
+      name
+    }
+  }
+}

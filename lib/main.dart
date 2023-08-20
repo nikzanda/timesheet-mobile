@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:timesheet/screens/activity_create.dart';
-import 'package:timesheet/screens/timesheet_edit.dart';
-import 'package:timesheet/screens/timesheet_list.dart';
+
+import 'screens/timesheets/activity_create.dart';
+import 'screens/timesheets/timesheet_edit.dart';
+import 'screens/timesheets/timesheet_list.dart';
+
 
 void main() async {
   await dotenv.load();

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:timesheet/screens/activity_create.dart';
-import 'package:timesheet/screens/timesheet.graphql.dart';
+import 'package:timesheet/screens/timesheets/timesheet.graphql.dart';
+
+import 'activity_create.dart';
+
 
 class TimesheetEditArguments {
   final String timesheetId;
