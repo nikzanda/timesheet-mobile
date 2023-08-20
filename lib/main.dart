@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:timesheet/screens/activity_create.dart';
 import 'package:timesheet/screens/timesheet_edit.dart';
 import 'package:timesheet/screens/timesheet_list.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(const MyApp());
 }
 
@@ -14,8 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final HttpLink httpLink = HttpLink('http://192.168.1.4:4001/graphql');
-    // final HttpLink httpLink = HttpLink('http://10.0.2.2:4001/graphql');
+    final HttpLink httpLink = HttpLink(dotenv.env['GRAPHQLURI']!);
 
     final AuthLink authLink = AuthLink(
         getToken: () =>
