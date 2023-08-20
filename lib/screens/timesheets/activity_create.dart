@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 import 'package:timesheet/schema.graphql.dart';
 import 'package:timesheet/helpers/date_utils.dart';
+import 'package:timesheet/screens/customers/widgets/customer_dropdownbutton.dart';
+import 'package:timesheet/screens/projects/widgets/project_dropdownbutton.dart';
 import 'package:timesheet/screens/timesheets/timesheet.graphql.dart';
 
 class ActivityCreateArguments {
@@ -58,21 +60,6 @@ class _ActivityCreateState extends State<ActivityCreate> {
       return const CircularProgressIndicator();
     }
 
-    var customers = [
-      const DropdownMenuEntry(
-          value: 'Q3VzdG9tZXI6NjQ2NTUxNDNhNWIwODJhNzg2ZDA4NjJk',
-          label: 'Nicolò Zandarin'),
-    ];
-
-    var projects = [
-      const DropdownMenuEntry(
-          value: 'UHJvamVjdDo2NDVlOTcwZDBkOGVmNTJjMzljNWU1ZWE=',
-          label: 'Timesheet'),
-      const DropdownMenuEntry(
-          value: 'UHJvamVjdDo2NDY4ZDM0MGM4MzQwMzE4M2ZmMDlkODg=',
-          label: 'KeyManager'),
-    ];
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Nuova attività'),
@@ -123,34 +110,23 @@ class _ActivityCreateState extends State<ActivityCreate> {
                     },
                   ),
                   // Customer
-                  DropdownButtonFormField(
+                  // CustomerDropdownButton(customerId, onCha)
+                  CustomerDropdownButton(
                     value: customerId,
-                    items: customers.map((customer) {
-                      return DropdownMenuItem(
-                        value: customer.value,
-                        child: Text(customer.label),
-                      );
-                    }).toList(),
                     onChanged: (newValue) {
                       setState(() {
                         customerId = newValue;
                       });
                     },
-                    isExpanded: true,
                   ),
                   // Project
-                  DropdownButtonFormField(
+                  ProjectDropdownButton(
                     value: projectId,
-                    items: projects.map((project) {
-                      return DropdownMenuItem(
-                          value: project.value, child: Text(project.label));
-                    }).toList(),
                     onChanged: (newValue) {
                       setState(() {
                         projectId = newValue;
                       });
                     },
-                    isExpanded: true,
                   ),
                   // Description
                   TextFormField(
