@@ -22,6 +22,8 @@ class _ActivityCreateState extends State<ActivityCreate> {
   final descriptionController = TextEditingController();
   DateTime? selectedDate = DateTime.now();
   TimeRange? selectedTimeRange;
+  String? customerId;
+  String? projectId;
 
   @override
   void dispose() {
@@ -55,6 +57,21 @@ class _ActivityCreateState extends State<ActivityCreate> {
     if (create.result.isLoading) {
       return const CircularProgressIndicator();
     }
+
+    var customers = [
+      const DropdownMenuEntry(
+          value: 'Q3VzdG9tZXI6NjQ2NTUxNDNhNWIwODJhNzg2ZDA4NjJk',
+          label: 'Nicolò Zandarin'),
+    ];
+
+    var projects = [
+      const DropdownMenuEntry(
+          value: 'UHJvamVjdDo2NDVlOTcwZDBkOGVmNTJjMzljNWU1ZWE=',
+          label: 'Timesheet'),
+      const DropdownMenuEntry(
+          value: 'UHJvamVjdDo2NDY4ZDM0MGM4MzQwMzE4M2ZmMDlkODg=',
+          label: 'KeyManager'),
+    ];
 
     return Scaffold(
         appBar: AppBar(
@@ -105,6 +122,37 @@ class _ActivityCreateState extends State<ActivityCreate> {
                       }
                     },
                   ),
+                  // Customer
+                  DropdownButtonFormField(
+                    value: customerId,
+                    items: customers.map((customer) {
+                      return DropdownMenuItem(
+                        value: customer.value,
+                        child: Text(customer.label),
+                      );
+                    }).toList(),
+                    onChanged: (newValue) {
+                      setState(() {
+                        customerId = newValue;
+                      });
+                    },
+                    isExpanded: true,
+                  ),
+                  // Project
+                  DropdownButtonFormField(
+                    value: projectId,
+                    items: projects.map((project) {
+                      return DropdownMenuItem(
+                          value: project.value, child: Text(project.label));
+                    }).toList(),
+                    onChanged: (newValue) {
+                      setState(() {
+                        projectId = newValue;
+                      });
+                    },
+                    isExpanded: true,
+                  ),
+                  // Description
                   TextFormField(
                     // The validator receives the text that the user has entered.
                     validator: (value) {
@@ -132,11 +180,14 @@ class _ActivityCreateState extends State<ActivityCreate> {
 
                           List<Input$ActivityCreateInput> activities = [
                             Input$ActivityCreateInput(
-                                startTime:
-                                    startTime.millisecondsSinceEpoch.toDouble(),
-                                endTime:
-                                    endTime.millisecondsSinceEpoch.toDouble(),
-                                description: descriptionController.text)
+                              startTime:
+                                  startTime.millisecondsSinceEpoch.toDouble(),
+                              endTime:
+                                  endTime.millisecondsSinceEpoch.toDouble(),
+                              customerId: customerId,
+                              projectId: projectId,
+                              description: descriptionController.text,
+                            )
                           ];
 
                           final variables = Variables$Mutation$ActivitiesCreate(
