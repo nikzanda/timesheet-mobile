@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:timesheet/schema.graphql.dart';
 import 'package:timesheet/screens/timesheets/timesheet.graphql.dart';
 
 import 'activity_create.dart';
-
 
 class TimesheetEditArguments {
   final String timesheetId;
@@ -32,6 +32,14 @@ class TimesheetEdit extends HookWidget {
     if (result.result.isLoading) {
       return const CircularProgressIndicator();
     }
+
+    final deleteActivity =
+        useMutation$ActivitiesDelete(WidgetOptions$Mutation$ActivitiesDelete(
+      onCompleted: (p0, p1) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Attività cancellata')));
+      },
+    ));
 
     final timesheet =
         Fragment$TimesheetDetail.fromJson(result.result.data!['timesheet']);
@@ -127,15 +135,46 @@ class TimesheetEdit extends HookWidget {
               )));
             }
 
-            return ListTile(
-              title: Text('$from - $to'),
-              subtitle: subtitle.isNotEmpty
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: subtitle,
-                    )
-                  : null,
-            );
+            return Dismissible(
+                key: Key(activity.id),
+                onDismissed: (direction) {
+                  deleteActivity.runMutation(
+                      Variables$Mutation$ActivitiesDelete(
+                          input: Input$ActivitiesDeleteInput(
+                              timesheetId: timesheetId,
+                              activitiesIds: [activity.id])));
+                },
+                background: Container(
+                  color: Colors.red,
+                  alignment: Alignment.centerRight,
+                  child: const FaIcon(FontAwesomeIcons.trash),
+                ),
+                confirmDismiss: (direction) => showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: const Text('confirm'),
+                          content: const Text(
+                              "Are you sure you wish to delete this item?"),
+                          actions: [
+                            ElevatedButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(true),
+                                child: const Text("DELETE")),
+                            ElevatedButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: const Text("CANCEL"),
+                            ),
+                          ],
+                        )),
+                child: ListTile(
+                  title: Text('$from - $to'),
+                  subtitle: subtitle.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: subtitle,
+                        )
+                      : null,
+                ));
           },
         ));
   }

@@ -48,3 +48,11 @@ mutation ActivitiesCreate($input: ActivitiesCreateInput!, $activityIds: [ID!]) {
     }
   }
 }
+
+mutation ActivitiesDelete($input: ActivitiesDeleteInput!, $activityIds: [ID!]) {
+  activitiesDelete(input: $input) {
+    timesheet {
+      ...TimesheetDetail
+    }
+  }
+}

@@ -3390,3 +3390,726 @@ class _CopyWithStubImpl$Mutation$ActivitiesCreate$activitiesCreate<TRes>
   CopyWith$Fragment$TimesheetDetail<TRes> get timesheet =>
       CopyWith$Fragment$TimesheetDetail.stub(_res);
 }
+
+class Variables$Mutation$ActivitiesDelete {
+  factory Variables$Mutation$ActivitiesDelete({
+    required Input$ActivitiesDeleteInput input,
+    List<String>? activityIds,
+  }) =>
+      Variables$Mutation$ActivitiesDelete._({
+        r'input': input,
+        if (activityIds != null) r'activityIds': activityIds,
+      });
+
+  Variables$Mutation$ActivitiesDelete._(this._$data);
+
+  factory Variables$Mutation$ActivitiesDelete.fromJson(
+      Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] =
+        Input$ActivitiesDeleteInput.fromJson((l$input as Map<String, dynamic>));
+    if (data.containsKey('activityIds')) {
+      final l$activityIds = data['activityIds'];
+      result$data['activityIds'] =
+          (l$activityIds as List<dynamic>?)?.map((e) => (e as String)).toList();
+    }
+    return Variables$Mutation$ActivitiesDelete._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$ActivitiesDeleteInput get input =>
+      (_$data['input'] as Input$ActivitiesDeleteInput);
+  List<String>? get activityIds => (_$data['activityIds'] as List<String>?);
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    if (_$data.containsKey('activityIds')) {
+      final l$activityIds = activityIds;
+      result$data['activityIds'] = l$activityIds?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$ActivitiesDelete<
+          Variables$Mutation$ActivitiesDelete>
+      get copyWith => CopyWith$Variables$Mutation$ActivitiesDelete(
+            this,
+            (i) => i,
+          );
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Variables$Mutation$ActivitiesDelete) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    final l$activityIds = activityIds;
+    final lOther$activityIds = other.activityIds;
+    if (_$data.containsKey('activityIds') !=
+        other._$data.containsKey('activityIds')) {
+      return false;
+    }
+    if (l$activityIds != null && lOther$activityIds != null) {
+      if (l$activityIds.length != lOther$activityIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$activityIds.length; i++) {
+        final l$activityIds$entry = l$activityIds[i];
+        final lOther$activityIds$entry = lOther$activityIds[i];
+        if (l$activityIds$entry != lOther$activityIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$activityIds != lOther$activityIds) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    final l$activityIds = activityIds;
+    return Object.hashAll([
+      l$input,
+      _$data.containsKey('activityIds')
+          ? l$activityIds == null
+              ? null
+              : Object.hashAll(l$activityIds.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$ActivitiesDelete<TRes> {
+  factory CopyWith$Variables$Mutation$ActivitiesDelete(
+    Variables$Mutation$ActivitiesDelete instance,
+    TRes Function(Variables$Mutation$ActivitiesDelete) then,
+  ) = _CopyWithImpl$Variables$Mutation$ActivitiesDelete;
+
+  factory CopyWith$Variables$Mutation$ActivitiesDelete.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$ActivitiesDelete;
+
+  TRes call({
+    Input$ActivitiesDeleteInput? input,
+    List<String>? activityIds,
+  });
+}
+
+class _CopyWithImpl$Variables$Mutation$ActivitiesDelete<TRes>
+    implements CopyWith$Variables$Mutation$ActivitiesDelete<TRes> {
+  _CopyWithImpl$Variables$Mutation$ActivitiesDelete(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$ActivitiesDelete _instance;
+
+  final TRes Function(Variables$Mutation$ActivitiesDelete) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? input = _undefined,
+    Object? activityIds = _undefined,
+  }) =>
+      _then(Variables$Mutation$ActivitiesDelete._({
+        ..._instance._$data,
+        if (input != _undefined && input != null)
+          'input': (input as Input$ActivitiesDeleteInput),
+        if (activityIds != _undefined)
+          'activityIds': (activityIds as List<String>?),
+      }));
+}
+
+class _CopyWithStubImpl$Variables$Mutation$ActivitiesDelete<TRes>
+    implements CopyWith$Variables$Mutation$ActivitiesDelete<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$ActivitiesDelete(this._res);
+
+  TRes _res;
+
+  call({
+    Input$ActivitiesDeleteInput? input,
+    List<String>? activityIds,
+  }) =>
+      _res;
+}
+
+class Mutation$ActivitiesDelete {
+  Mutation$ActivitiesDelete({
+    required this.activitiesDelete,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$ActivitiesDelete.fromJson(Map<String, dynamic> json) {
+    final l$activitiesDelete = json['activitiesDelete'];
+    final l$$__typename = json['__typename'];
+    return Mutation$ActivitiesDelete(
+      activitiesDelete: Mutation$ActivitiesDelete$activitiesDelete.fromJson(
+          (l$activitiesDelete as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$ActivitiesDelete$activitiesDelete activitiesDelete;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$activitiesDelete = activitiesDelete;
+    _resultData['activitiesDelete'] = l$activitiesDelete.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$activitiesDelete = activitiesDelete;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$activitiesDelete,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$ActivitiesDelete) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$activitiesDelete = activitiesDelete;
+    final lOther$activitiesDelete = other.activitiesDelete;
+    if (l$activitiesDelete != lOther$activitiesDelete) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$ActivitiesDelete
+    on Mutation$ActivitiesDelete {
+  CopyWith$Mutation$ActivitiesDelete<Mutation$ActivitiesDelete> get copyWith =>
+      CopyWith$Mutation$ActivitiesDelete(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith$Mutation$ActivitiesDelete<TRes> {
+  factory CopyWith$Mutation$ActivitiesDelete(
+    Mutation$ActivitiesDelete instance,
+    TRes Function(Mutation$ActivitiesDelete) then,
+  ) = _CopyWithImpl$Mutation$ActivitiesDelete;
+
+  factory CopyWith$Mutation$ActivitiesDelete.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$ActivitiesDelete;
+
+  TRes call({
+    Mutation$ActivitiesDelete$activitiesDelete? activitiesDelete,
+    String? $__typename,
+  });
+  CopyWith$Mutation$ActivitiesDelete$activitiesDelete<TRes>
+      get activitiesDelete;
+}
+
+class _CopyWithImpl$Mutation$ActivitiesDelete<TRes>
+    implements CopyWith$Mutation$ActivitiesDelete<TRes> {
+  _CopyWithImpl$Mutation$ActivitiesDelete(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$ActivitiesDelete _instance;
+
+  final TRes Function(Mutation$ActivitiesDelete) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? activitiesDelete = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$ActivitiesDelete(
+        activitiesDelete: activitiesDelete == _undefined ||
+                activitiesDelete == null
+            ? _instance.activitiesDelete
+            : (activitiesDelete as Mutation$ActivitiesDelete$activitiesDelete),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Mutation$ActivitiesDelete$activitiesDelete<TRes>
+      get activitiesDelete {
+    final local$activitiesDelete = _instance.activitiesDelete;
+    return CopyWith$Mutation$ActivitiesDelete$activitiesDelete(
+        local$activitiesDelete, (e) => call(activitiesDelete: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$ActivitiesDelete<TRes>
+    implements CopyWith$Mutation$ActivitiesDelete<TRes> {
+  _CopyWithStubImpl$Mutation$ActivitiesDelete(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$ActivitiesDelete$activitiesDelete? activitiesDelete,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Mutation$ActivitiesDelete$activitiesDelete<TRes>
+      get activitiesDelete =>
+          CopyWith$Mutation$ActivitiesDelete$activitiesDelete.stub(_res);
+}
+
+const documentNodeMutationActivitiesDelete = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'ActivitiesDelete'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'input')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ActivitiesDeleteInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'activityIds')),
+        type: ListTypeNode(
+          type: NamedTypeNode(
+            name: NameNode(value: 'ID'),
+            isNonNull: true,
+          ),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'activitiesDelete'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'input'),
+            value: VariableNode(name: NameNode(value: 'input')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'timesheet'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'TimesheetDetail'),
+                directives: [],
+              ),
+              FieldNode(
+                name: NameNode(value: '__typename'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+  fragmentDefinitionTimesheetDetail,
+  fragmentDefinitionTimesheetListItem,
+]);
+Mutation$ActivitiesDelete _parserFn$Mutation$ActivitiesDelete(
+        Map<String, dynamic> data) =>
+    Mutation$ActivitiesDelete.fromJson(data);
+typedef OnMutationCompleted$Mutation$ActivitiesDelete = FutureOr<void> Function(
+  Map<String, dynamic>?,
+  Mutation$ActivitiesDelete?,
+);
+
+class Options$Mutation$ActivitiesDelete
+    extends graphql.MutationOptions<Mutation$ActivitiesDelete> {
+  Options$Mutation$ActivitiesDelete({
+    String? operationName,
+    required Variables$Mutation$ActivitiesDelete variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$ActivitiesDelete? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$ActivitiesDelete? onCompleted,
+    graphql.OnMutationUpdate<Mutation$ActivitiesDelete>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ActivitiesDelete(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationActivitiesDelete,
+          parserFn: _parserFn$Mutation$ActivitiesDelete,
+        );
+
+  final OnMutationCompleted$Mutation$ActivitiesDelete? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+class WatchOptions$Mutation$ActivitiesDelete
+    extends graphql.WatchQueryOptions<Mutation$ActivitiesDelete> {
+  WatchOptions$Mutation$ActivitiesDelete({
+    String? operationName,
+    required Variables$Mutation$ActivitiesDelete variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$ActivitiesDelete? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+          variables: variables.toJson(),
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          document: documentNodeMutationActivitiesDelete,
+          pollInterval: pollInterval,
+          eagerlyFetchResults: eagerlyFetchResults,
+          carryForwardDataOnException: carryForwardDataOnException,
+          fetchResults: fetchResults,
+          parserFn: _parserFn$Mutation$ActivitiesDelete,
+        );
+}
+
+extension ClientExtension$Mutation$ActivitiesDelete on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$ActivitiesDelete>>
+      mutate$ActivitiesDelete(
+              Options$Mutation$ActivitiesDelete options) async =>
+          await this.mutate(options);
+  graphql.ObservableQuery<Mutation$ActivitiesDelete>
+      watchMutation$ActivitiesDelete(
+              WatchOptions$Mutation$ActivitiesDelete options) =>
+          this.watchMutation(options);
+}
+
+class Mutation$ActivitiesDelete$HookResult {
+  Mutation$ActivitiesDelete$HookResult(
+    this.runMutation,
+    this.result,
+  );
+
+  final RunMutation$Mutation$ActivitiesDelete runMutation;
+
+  final graphql.QueryResult<Mutation$ActivitiesDelete> result;
+}
+
+Mutation$ActivitiesDelete$HookResult useMutation$ActivitiesDelete(
+    [WidgetOptions$Mutation$ActivitiesDelete? options]) {
+  final result = graphql_flutter
+      .useMutation(options ?? WidgetOptions$Mutation$ActivitiesDelete());
+  return Mutation$ActivitiesDelete$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+      variables.toJson(),
+      optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+    ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$ActivitiesDelete>
+    useWatchMutation$ActivitiesDelete(
+            WatchOptions$Mutation$ActivitiesDelete options) =>
+        graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$ActivitiesDelete
+    extends graphql.MutationOptions<Mutation$ActivitiesDelete> {
+  WidgetOptions$Mutation$ActivitiesDelete({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$ActivitiesDelete? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$ActivitiesDelete? onCompleted,
+    graphql.OnMutationUpdate<Mutation$ActivitiesDelete>? update,
+    graphql.OnError? onError,
+  })  : onCompletedWithParsed = onCompleted,
+        super(
+          operationName: operationName,
+          fetchPolicy: fetchPolicy,
+          errorPolicy: errorPolicy,
+          cacheRereadPolicy: cacheRereadPolicy,
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+          context: context,
+          onCompleted: onCompleted == null
+              ? null
+              : (data) => onCompleted(
+                    data,
+                    data == null
+                        ? null
+                        : _parserFn$Mutation$ActivitiesDelete(data),
+                  ),
+          update: update,
+          onError: onError,
+          document: documentNodeMutationActivitiesDelete,
+          parserFn: _parserFn$Mutation$ActivitiesDelete,
+        );
+
+  final OnMutationCompleted$Mutation$ActivitiesDelete? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+        ...super.onCompleted == null
+            ? super.properties
+            : super.properties.where((property) => property != onCompleted),
+        onCompletedWithParsed,
+      ];
+}
+
+typedef RunMutation$Mutation$ActivitiesDelete
+    = graphql.MultiSourceResult<Mutation$ActivitiesDelete> Function(
+  Variables$Mutation$ActivitiesDelete, {
+  Object? optimisticResult,
+  Mutation$ActivitiesDelete? typedOptimisticResult,
+});
+typedef Builder$Mutation$ActivitiesDelete = widgets.Widget Function(
+  RunMutation$Mutation$ActivitiesDelete,
+  graphql.QueryResult<Mutation$ActivitiesDelete>?,
+);
+
+class Mutation$ActivitiesDelete$Widget
+    extends graphql_flutter.Mutation<Mutation$ActivitiesDelete> {
+  Mutation$ActivitiesDelete$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$ActivitiesDelete? options,
+    required Builder$Mutation$ActivitiesDelete builder,
+  }) : super(
+          key: key,
+          options: options ?? WidgetOptions$Mutation$ActivitiesDelete(),
+          builder: (
+            run,
+            result,
+          ) =>
+              builder(
+            (
+              variables, {
+              optimisticResult,
+              typedOptimisticResult,
+            }) =>
+                run(
+              variables.toJson(),
+              optimisticResult:
+                  optimisticResult ?? typedOptimisticResult?.toJson(),
+            ),
+            result,
+          ),
+        );
+}
+
+class Mutation$ActivitiesDelete$activitiesDelete {
+  Mutation$ActivitiesDelete$activitiesDelete({
+    required this.timesheet,
+    this.$__typename = 'ActivitiesDeletePayload',
+  });
+
+  factory Mutation$ActivitiesDelete$activitiesDelete.fromJson(
+      Map<String, dynamic> json) {
+    final l$timesheet = json['timesheet'];
+    final l$$__typename = json['__typename'];
+    return Mutation$ActivitiesDelete$activitiesDelete(
+      timesheet: Fragment$TimesheetDetail.fromJson(
+          (l$timesheet as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$TimesheetDetail timesheet;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$timesheet = timesheet;
+    _resultData['timesheet'] = l$timesheet.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$timesheet = timesheet;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$timesheet,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (!(other is Mutation$ActivitiesDelete$activitiesDelete) ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$timesheet = timesheet;
+    final lOther$timesheet = other.timesheet;
+    if (l$timesheet != lOther$timesheet) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$ActivitiesDelete$activitiesDelete
+    on Mutation$ActivitiesDelete$activitiesDelete {
+  CopyWith$Mutation$ActivitiesDelete$activitiesDelete<
+          Mutation$ActivitiesDelete$activitiesDelete>
+      get copyWith => CopyWith$Mutation$ActivitiesDelete$activitiesDelete(
+            this,
+            (i) => i,
+          );
+}
+
+abstract class CopyWith$Mutation$ActivitiesDelete$activitiesDelete<TRes> {
+  factory CopyWith$Mutation$ActivitiesDelete$activitiesDelete(
+    Mutation$ActivitiesDelete$activitiesDelete instance,
+    TRes Function(Mutation$ActivitiesDelete$activitiesDelete) then,
+  ) = _CopyWithImpl$Mutation$ActivitiesDelete$activitiesDelete;
+
+  factory CopyWith$Mutation$ActivitiesDelete$activitiesDelete.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$ActivitiesDelete$activitiesDelete;
+
+  TRes call({
+    Fragment$TimesheetDetail? timesheet,
+    String? $__typename,
+  });
+  CopyWith$Fragment$TimesheetDetail<TRes> get timesheet;
+}
+
+class _CopyWithImpl$Mutation$ActivitiesDelete$activitiesDelete<TRes>
+    implements CopyWith$Mutation$ActivitiesDelete$activitiesDelete<TRes> {
+  _CopyWithImpl$Mutation$ActivitiesDelete$activitiesDelete(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$ActivitiesDelete$activitiesDelete _instance;
+
+  final TRes Function(Mutation$ActivitiesDelete$activitiesDelete) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? timesheet = _undefined,
+    Object? $__typename = _undefined,
+  }) =>
+      _then(Mutation$ActivitiesDelete$activitiesDelete(
+        timesheet: timesheet == _undefined || timesheet == null
+            ? _instance.timesheet
+            : (timesheet as Fragment$TimesheetDetail),
+        $__typename: $__typename == _undefined || $__typename == null
+            ? _instance.$__typename
+            : ($__typename as String),
+      ));
+  CopyWith$Fragment$TimesheetDetail<TRes> get timesheet {
+    final local$timesheet = _instance.timesheet;
+    return CopyWith$Fragment$TimesheetDetail(
+        local$timesheet, (e) => call(timesheet: e));
+  }
+}
+
+class _CopyWithStubImpl$Mutation$ActivitiesDelete$activitiesDelete<TRes>
+    implements CopyWith$Mutation$ActivitiesDelete$activitiesDelete<TRes> {
+  _CopyWithStubImpl$Mutation$ActivitiesDelete$activitiesDelete(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment$TimesheetDetail? timesheet,
+    String? $__typename,
+  }) =>
+      _res;
+  CopyWith$Fragment$TimesheetDetail<TRes> get timesheet =>
+      CopyWith$Fragment$TimesheetDetail.stub(_res);
+}
