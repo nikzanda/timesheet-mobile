@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:timesheet/screens/authentication/login_screen.dart';
 
 import 'screens/timesheets/activity_create.dart';
 import 'screens/timesheets/timesheet_edit.dart';
 import 'screens/timesheets/timesheet_list.dart';
 
-
 void main() async {
   await dotenv.load();
-  runApp(const MyApp());
+  runApp(const TimesheetApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class TimesheetApp extends StatelessWidget {
+  const TimesheetApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -56,7 +56,8 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const TimesheetList(),
+          // '/': (context) => const TimesheetList(),
+          '/': (context) => const LoginScreen(),
           '/timesheet': (context) => const TimesheetEdit(),
           '/timesheet/activity/new': (context) => const ActivityCreate(),
         },
