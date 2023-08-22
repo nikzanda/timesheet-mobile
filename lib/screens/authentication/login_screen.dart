@@ -1,20 +1,29 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:timesheet/schema.graphql.dart';
+import 'package:timesheet/screens/authentication/user.graphql.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatefulHookWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  LoginScreenState createState() => LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final login = useMutation$Login(WidgetOptions$Mutation$Login(
+      onCompleted: (p0, p1) {
+        print('OK!');
+      },
+    ));
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
@@ -26,7 +35,7 @@ class LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               TextFormField(
-                controller: _usernameController,
+                controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
@@ -54,7 +63,10 @@ class LoginScreenState extends State<LoginScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Perform login
+                    login.runMutation(Variables$Mutation$Login(
+                        input: Input$AuthenticationLoginInput(
+                            email: _emailController.text,
+                            password: _passwordController.text)));
                   }
                 },
                 child: const Text('Login'),
