@@ -43,6 +43,7 @@ dependencies:
   time_range_picker: ^2.2.0
   flutter_dotenv: ^5.1.0
   email_validator: ^2.1.17
+  flutter_secure_storage: ^8.0.0
 
 dependency_overrides:
   web_socket_channel: 2.2.0

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:timesheet/screens/authentication/login_screen.dart';
 
 import 'screens/timesheets/activity_create.dart';
 import 'screens/timesheets/timesheet_edit.dart';
 import 'screens/timesheets/timesheet_list.dart';
+
+final storage = new FlutterSecureStorage();
 
 void main() async {
   await dotenv.load();
@@ -20,9 +23,17 @@ class TimesheetApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final HttpLink httpLink = HttpLink(dotenv.env['GRAPHQLURI']!);
 
-    final AuthLink authLink = AuthLink(
-        getToken: () =>
-            'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY5MDgyNTUzNSwiZXhwIjoxNjk2MDA5NTM1LCJzdWIiOiI2NDZiYTVhZDA1MWQ5MDU5OGE2MjMwNGMifQ.Dr2ReWAgjKQTRvqAX8tq25EqBsu9WSI6OGQIdfZl4eXVt7BusFab07dXjgwvLYUTlZYVo3cjyoLGWSlHCRBh0VJhaPsNSAbVGMZcIbWNqL9Xx-gx6UqguVHc3N819d4Cyi-k5EXgw-HQdPL2ngCZcwxzKjs50zIUu09efduazn7fx5_gUi9L03qqU4MR7ZTGLOmj0O9igW8Bbq13QUBOO9JR2tZ2iAO2t1PWyUOOxL0S69eqHhMddFEZkSbPycPsH8y7lAGcrUgizZEnxky0fls6rWxzgYLAyXC2qQj4BPj4cArBr2KJFOB3jYx02EcVpr34fB9E3PeLPn3Ei3LZF9lDbtgYOJoqRkWULdsE8ihNRjpamUVVOWCgo534rLBiSdCYR_tnp8Nw1iI9wYePHVUKTRzLBdx5p0-RzxTQvm4JxLIQvU4_dZNtiIAuD-aidvGi1NJGF-g_Uv32u4wcIa-FL8gaYE_Nrnx2OnkWMVj1GFzsotJ-ImX37ScgWIP2K-SluMDdxFw35F4Tho3oOdqJA359bSGYc7Kf7ZAYHqVDD7DE8UpFKR6E3gjBLae012kS4jDmOWj3PYwtcsqpr0J4KrSnb9ZhKad_42DurmmfQOsyT32hBd0pEQzIrsx00Ucrk9wMI_MwFl4bIe0-GSuB-ORoqvcoyFWDmtxMu3w');
+    // final AuthLink authLink = AuthLink(
+    //     getToken: () =>
+    //         'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY5MDgyNTUzNSwiZXhwIjoxNjk2MDA5NTM1LCJzdWIiOiI2NDZiYTVhZDA1MWQ5MDU5OGE2MjMwNGMifQ.Dr2ReWAgjKQTRvqAX8tq25EqBsu9WSI6OGQIdfZl4eXVt7BusFab07dXjgwvLYUTlZYVo3cjyoLGWSlHCRBh0VJhaPsNSAbVGMZcIbWNqL9Xx-gx6UqguVHc3N819d4Cyi-k5EXgw-HQdPL2ngCZcwxzKjs50zIUu09efduazn7fx5_gUi9L03qqU4MR7ZTGLOmj0O9igW8Bbq13QUBOO9JR2tZ2iAO2t1PWyUOOxL0S69eqHhMddFEZkSbPycPsH8y7lAGcrUgizZEnxky0fls6rWxzgYLAyXC2qQj4BPj4cArBr2KJFOB3jYx02EcVpr34fB9E3PeLPn3Ei3LZF9lDbtgYOJoqRkWULdsE8ihNRjpamUVVOWCgo534rLBiSdCYR_tnp8Nw1iI9wYePHVUKTRzLBdx5p0-RzxTQvm4JxLIQvU4_dZNtiIAuD-aidvGi1NJGF-g_Uv32u4wcIa-FL8gaYE_Nrnx2OnkWMVj1GFzsotJ-ImX37ScgWIP2K-SluMDdxFw35F4Tho3oOdqJA359bSGYc7Kf7ZAYHqVDD7DE8UpFKR6E3gjBLae012kS4jDmOWj3PYwtcsqpr0J4KrSnb9ZhKad_42DurmmfQOsyT32hBd0pEQzIrsx00Ucrk9wMI_MwFl4bIe0-GSuB-ORoqvcoyFWDmtxMu3w');
+    final AuthLink authLink = AuthLink(getToken: () async {
+      final token = await storage.read(key: 'token');
+      print(token);
+      if (token != null) {
+        return 'Bearer $token';
+      }
+      return null;
+    });
 
     final Link link = authLink.concat(httpLink);
 
