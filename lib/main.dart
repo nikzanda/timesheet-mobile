@@ -56,8 +56,8 @@ class TimesheetApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          // '/': (context) => const TimesheetList(),
-          '/': (context) => const LoginScreen(),
+          '/': (context) => const TimesheetList(),
+          // '/': (context) => const LoginScreen(),
           '/timesheet': (context) => const TimesheetEdit(),
           '/timesheet/activity/new': (context) => const ActivityCreate(),
         },
