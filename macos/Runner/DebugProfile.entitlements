@@ -11,5 +11,8 @@
 	<!-- per eseguire le query -->
 	<key>com.apple.security.network.client</key>
 	<true/>
+	<!-- per salvare il token usando FlutterSecureStorage -->
+	<key>keychain-access-groups</key>
+	<array/>
 </dict>
 </plist>
