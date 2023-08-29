@@ -138,6 +138,9 @@ class TimesheetEdit extends HookWidget {
             return Dismissible(
                 key: Key(activity.id),
                 onDismissed: (direction) {
+                  timesheet.activities
+                      .removeWhere((element) => element.id == activity.id);
+
                   deleteActivity.runMutation(
                       Variables$Mutation$ActivitiesDelete(
                           input: Input$ActivitiesDeleteInput(

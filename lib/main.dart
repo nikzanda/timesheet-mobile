@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:timesheet/router/auth_observer.dart';
 import 'package:timesheet/screens/authentication/login_screen.dart';
 
 import 'screens/timesheets/activity_create.dart';
 import 'screens/timesheets/timesheet_edit.dart';
 import 'screens/timesheets/timesheet_list.dart';
+import './helpers/storage.dart';
 
 void main() async {
   await dotenv.load();
+  await initHiveForFlutter();
+  // await storage.delete(key: 'token');
   runApp(const TimesheetApp());
 }
 
@@ -20,48 +25,77 @@ class TimesheetApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final HttpLink httpLink = HttpLink(dotenv.env['GRAPHQLURI']!);
 
-    final AuthLink authLink = AuthLink(
-        getToken: () =>
-            'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY5MDgyNTUzNSwiZXhwIjoxNjk2MDA5NTM1LCJzdWIiOiI2NDZiYTVhZDA1MWQ5MDU5OGE2MjMwNGMifQ.Dr2ReWAgjKQTRvqAX8tq25EqBsu9WSI6OGQIdfZl4eXVt7BusFab07dXjgwvLYUTlZYVo3cjyoLGWSlHCRBh0VJhaPsNSAbVGMZcIbWNqL9Xx-gx6UqguVHc3N819d4Cyi-k5EXgw-HQdPL2ngCZcwxzKjs50zIUu09efduazn7fx5_gUi9L03qqU4MR7ZTGLOmj0O9igW8Bbq13QUBOO9JR2tZ2iAO2t1PWyUOOxL0S69eqHhMddFEZkSbPycPsH8y7lAGcrUgizZEnxky0fls6rWxzgYLAyXC2qQj4BPj4cArBr2KJFOB3jYx02EcVpr34fB9E3PeLPn3Ei3LZF9lDbtgYOJoqRkWULdsE8ihNRjpamUVVOWCgo534rLBiSdCYR_tnp8Nw1iI9wYePHVUKTRzLBdx5p0-RzxTQvm4JxLIQvU4_dZNtiIAuD-aidvGi1NJGF-g_Uv32u4wcIa-FL8gaYE_Nrnx2OnkWMVj1GFzsotJ-ImX37ScgWIP2K-SluMDdxFw35F4Tho3oOdqJA359bSGYc7Kf7ZAYHqVDD7DE8UpFKR6E3gjBLae012kS4jDmOWj3PYwtcsqpr0J4KrSnb9ZhKad_42DurmmfQOsyT32hBd0pEQzIrsx00Ucrk9wMI_MwFl4bIe0-GSuB-ORoqvcoyFWDmtxMu3w');
+    final Link authLink = Link.function((request, [next]) {
+      return next!(request).asyncMap((response) async {
+        final String? token = await storage.read(key: 'token');
+        if (token != null) {
+          final modifiedRequest = request.updateContextEntry<HttpLinkHeaders>(
+              (headers) => HttpLinkHeaders(headers: <String, String>{
+                    ...headers?.headers ?? {},
+                    'Authorization': 'Bearer $token'
+                  }));
+
+          return next(modifiedRequest).first;
+        }
+        return response;
+      });
+    });
 
     final Link link = authLink.concat(httpLink);
 
     ValueNotifier<GraphQLClient> client = ValueNotifier(GraphQLClient(
-      cache: GraphQLCache(),
+      cache: GraphQLCache(store: HiveStore()),
       link: link,
     ));
 
     return GraphQLProvider(
-      client: client,
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // TRY THIS: Try running your application with "flutter run". You'll see
-          // the application has a blue toolbar. Then, without quitting the app,
-          // try changing the seedColor in the colorScheme below to Colors.green
-          // and then invoke "hot reload" (save your changes or press the "hot
-          // reload" button in a Flutter-supported IDE, or press "r" if you used
-          // the command line to start the app).
-          //
-          // Notice that the counter didn't reset back to zero; the application
-          // state is not lost during the reload. To reset the state, use hot
-          // restart instead.
-          //
-          // This works for code too, not just values: Most code changes can be
-          // tested with just a hot reload.
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const TimesheetList(),
-          // '/': (context) => const LoginScreen(),
-          '/timesheet': (context) => const TimesheetEdit(),
-          '/timesheet/activity/new': (context) => const ActivityCreate(),
-        },
-      ),
-    );
+        client: client,
+        child: CacheProvider(
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              // This is the theme of your application.
+              //
+              // TRY THIS: Try running your application with "flutter run". You'll see
+              // the application has a blue toolbar. Then, without quitting the app,
+              // try changing the seedColor in the colorScheme below to Colors.green
+              // and then invoke "hot reload" (save your changes or press the "hot
+              // reload" button in a Flutter-supported IDE, or press "r" if you used
+              // the command line to start the app).
+              //
+              // Notice that the counter didn't reset back to zero; the application
+              // state is not lost during the reload. To reset the state, use hot
+              // restart instead.
+              //
+              // This works for code too, not just values: Most code changes can be
+              // tested with just a hot reload.
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+              useMaterial3: true,
+            ),
+            // initialRoute: '/',
+            home: FutureBuilder(
+              future: storage.read(key: 'token'),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                }
+
+                final String? token = snapshot.data;
+                if (token == null || JwtDecoder.isExpired(token)) {
+                  storage.delete(key: 'token');
+                  return const LoginScreen();
+                }
+                return const TimesheetList();
+              },
+            ),
+            navigatorObservers: [AuthObserver()],
+            routes: {
+              '/login': (context) => const LoginScreen(),
+              '/timesheets': (context) => const TimesheetList(),
+              '/timesheet': (context) => const TimesheetEdit(),
+              '/timesheet/activity/new': (context) => const ActivityCreate(),
+            },
+          ),
+        ));
   }
 }

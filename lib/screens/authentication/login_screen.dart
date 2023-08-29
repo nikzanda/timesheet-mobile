@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:timesheet/schema.graphql.dart';
 import 'package:timesheet/screens/authentication/user.graphql.dart';
+import '../../helpers/storage.dart';
 
 class LoginScreen extends StatefulHookWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,8 +20,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final login = useMutation$Login(WidgetOptions$Mutation$Login(
-      onCompleted: (p0, p1) {
-        print('OK!');
+      onCompleted: (p0, p1) async {
+        if (p1 != null) {
+          await storage.write(
+              key: 'token', value: p1.authenticationLogin.token);
+          Navigator.pushReplacementNamed(context, '/timesheets');
+        }
       },
     ));
 

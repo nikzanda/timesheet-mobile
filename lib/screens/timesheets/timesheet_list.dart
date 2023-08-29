@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'widgets/timesheets_table.dart';
 
-
 class TimesheetList extends StatelessWidget {
   const TimesheetList({super.key});
 
@@ -17,4 +16,3 @@ class TimesheetList extends StatelessWidget {
         ));
   }
 }
-
