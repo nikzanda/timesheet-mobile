@@ -14,8 +14,8 @@ class LoginScreen extends StatefulHookWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'admin@admin.com');
-  final _passwordController = TextEditingController(text: 'password');
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (p1 != null) {
           await storage.write(
               key: 'token', value: p1.authenticationLogin.token);
-          Navigator.pushNamed(context, '/');
+          Navigator.pushReplacementNamed(context, '/timesheets');
         }
       },
     ));

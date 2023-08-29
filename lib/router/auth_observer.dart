@@ -1,15 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:timesheet/helpers/storage.dart';
 
 class AuthObserver extends NavigatorObserver {
-  final bool isLoggedIn;
-
-  AuthObserver({required this.isLoggedIn});
-
   @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) async {
     super.didPush(route, previousRoute);
-    if (!isLoggedIn && route.settings.name != '/login') {
-      navigator?.pushReplacementNamed('/login');
+    final token = await storage.read(key: 'token');
+    if (token == null && route.settings.name != '/login') {
+      navigator!.pushReplacementNamed('/login');
     }
   }
 }

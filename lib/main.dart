@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:timesheet/router/auth_observer.dart';
 import 'package:timesheet/screens/authentication/login_screen.dart';
 
 import 'screens/timesheets/activity_create.dart';
@@ -11,6 +13,7 @@ import './helpers/storage.dart';
 void main() async {
   await dotenv.load();
   await initHiveForFlutter();
+  // await storage.delete(key: 'token');
   runApp(const TimesheetApp());
 }
 
@@ -69,10 +72,26 @@ class TimesheetApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
               useMaterial3: true,
             ),
-            initialRoute: '/login',
+            // initialRoute: '/',
+            home: FutureBuilder(
+              future: storage.read(key: 'token'),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                }
+
+                final String? token = snapshot.data;
+                if (token == null || JwtDecoder.isExpired(token)) {
+                  storage.delete(key: 'token');
+                  return const LoginScreen();
+                }
+                return const TimesheetList();
+              },
+            ),
+            navigatorObservers: [AuthObserver()],
             routes: {
               '/login': (context) => const LoginScreen(),
-              '/': (context) => const TimesheetList(),
+              '/timesheets': (context) => const TimesheetList(),
               '/timesheet': (context) => const TimesheetEdit(),
               '/timesheet/activity/new': (context) => const ActivityCreate(),
             },
