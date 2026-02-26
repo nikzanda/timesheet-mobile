@@ -75,6 +75,7 @@ type Customer {
   color: HexColorCode
   projects: [Project!]!
   isActive: Boolean!
+  totalTime: Int
   createdAt: Float
   updatedAt: Float
   canDelete: [CanDelete!]!
@@ -140,7 +141,13 @@ type CustomerUpdatePayload {
   customer: Customer!
 }
 
+type DayStatistic {
+  day: Float!
+  value: Float!
+}
+
 scalar HexColorCode
+scalar YearMonth
 
 type MonthStatistic {
   month: String!
@@ -229,6 +236,7 @@ type Project {
   description: String
   tag: String
   customers: [Customer!]!
+  totalTime: Int
   createdAt: Float
   updatedAt: Float
   canDelete: [CanDelete!]!
@@ -308,7 +316,7 @@ type Query {
   users(pageIndex: Int!, pageSize: Int!, filter: UserFilter): UserPagination!
   user(id: ID!): User!
   timesheets(pageIndex: Int!, pageSize: Int!, filter: TimesheetFilter): TimesheetPagination!
-  timesheet(id: ID, month: String): Timesheet!
+  timesheet(id: ID, month: YearMonth): Timesheet!
   years: [Int!]!
   customers(pageIndex: Int!, pageSize: Int!, filter: CustomerFilter): CustomerPagination!
   customer(id: ID!): Customer!
@@ -318,7 +326,9 @@ type Query {
   statisticsByTag: [TagStatistic!]!
   statisticsByCustomer: [CustomerStatistic!]!
   statisticsByProject: [ProjectStatistic!]!
-  statisticsByMonth: [MonthStatistic!]!
+  statisticsByMonth(year: Int): [MonthStatistic!]!
+  customerStatisticsByDay(customerId: ID!): [DayStatistic!]!
+  projectStatisticsByDay(projectId: ID!): [DayStatistic!]!
 }
 
 type Setting {
@@ -326,12 +336,16 @@ type Setting {
   organization: Organization!
   customer: CustomerSettingEnum!
   project: ProjectSettingEnum!
+  minuteStep: Int!
+  closeTimesheetAutomatically: Boolean!
 }
 
 input SettingUpdateInput {
   id: ID!
   customer: CustomerSettingEnum
   project: ProjectSettingEnum
+  minuteStep: Int
+  closeTimesheetAutomatically: Boolean
 }
 
 type SettingUpdatePayload {
@@ -351,14 +365,14 @@ type TagStatistic {
 type Timesheet {
   id: ID!
   user: User!
-  month: String!
+  month: YearMonth!
   status: TimesheetStatusEnum!
   totalTime: Int!
   activities(activityIds: [ID!]): [Activity!]!
 }
 
 input TimesheetCreateInput {
-  month: String!
+  month: YearMonth!
   activities: [ActivityCreateInput!]
 }
 
@@ -369,9 +383,9 @@ type TimesheetCreatePayload {
 input TimesheetFilter {
   ids: [ID!]
   year: String
-  month: String
-  fromMonth: String
-  toMonth: String
+  month: YearMonth
+  fromMonth: YearMonth
+  toMonth: YearMonth
   status: [TimesheetStatusEnum]
   sortBy: TimesheetSortEnum
   sortDirection: SortDirectionEnum

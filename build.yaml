@@ -10,3 +10,5 @@ targets:
           scalars:
             HexColorCode:
               type: String
+            YearMonth:
+              type: String

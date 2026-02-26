@@ -1,8 +1,0 @@
-query CustomerSearcher($filter: CustomerFilter) {
-  customers(pageIndex: 0, pageSize: 0, filter: $filter) {
-    data {
-      id
-      name
-    }
-  }
-}

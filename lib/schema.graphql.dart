@@ -3104,11 +3104,16 @@ class Input$SettingUpdateInput {
     required String id,
     Enum$CustomerSettingEnum? customer,
     Enum$ProjectSettingEnum? project,
+    int? minuteStep,
+    bool? closeTimesheetAutomatically,
   }) =>
       Input$SettingUpdateInput._({
         r'id': id,
         if (customer != null) r'customer': customer,
         if (project != null) r'project': project,
+        if (minuteStep != null) r'minuteStep': minuteStep,
+        if (closeTimesheetAutomatically != null)
+          r'closeTimesheetAutomatically': closeTimesheetAutomatically,
       });
 
   Input$SettingUpdateInput._(this._$data);
@@ -3129,6 +3134,15 @@ class Input$SettingUpdateInput {
           ? null
           : fromJson$Enum$ProjectSettingEnum((l$project as String));
     }
+    if (data.containsKey('minuteStep')) {
+      final l$minuteStep = data['minuteStep'];
+      result$data['minuteStep'] = (l$minuteStep as int?);
+    }
+    if (data.containsKey('closeTimesheetAutomatically')) {
+      final l$closeTimesheetAutomatically = data['closeTimesheetAutomatically'];
+      result$data['closeTimesheetAutomatically'] =
+          (l$closeTimesheetAutomatically as bool?);
+    }
     return Input$SettingUpdateInput._(result$data);
   }
 
@@ -3139,6 +3153,9 @@ class Input$SettingUpdateInput {
       (_$data['customer'] as Enum$CustomerSettingEnum?);
   Enum$ProjectSettingEnum? get project =>
       (_$data['project'] as Enum$ProjectSettingEnum?);
+  int? get minuteStep => (_$data['minuteStep'] as int?);
+  bool? get closeTimesheetAutomatically =>
+      (_$data['closeTimesheetAutomatically'] as bool?);
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$id = id;
@@ -3153,6 +3170,15 @@ class Input$SettingUpdateInput {
       final l$project = project;
       result$data['project'] =
           l$project == null ? null : toJson$Enum$ProjectSettingEnum(l$project);
+    }
+    if (_$data.containsKey('minuteStep')) {
+      final l$minuteStep = minuteStep;
+      result$data['minuteStep'] = l$minuteStep;
+    }
+    if (_$data.containsKey('closeTimesheetAutomatically')) {
+      final l$closeTimesheetAutomatically = closeTimesheetAutomatically;
+      result$data['closeTimesheetAutomatically'] =
+          l$closeTimesheetAutomatically;
     }
     return result$data;
   }
@@ -3193,6 +3219,25 @@ class Input$SettingUpdateInput {
     if (l$project != lOther$project) {
       return false;
     }
+    final l$minuteStep = minuteStep;
+    final lOther$minuteStep = other.minuteStep;
+    if (_$data.containsKey('minuteStep') !=
+        other._$data.containsKey('minuteStep')) {
+      return false;
+    }
+    if (l$minuteStep != lOther$minuteStep) {
+      return false;
+    }
+    final l$closeTimesheetAutomatically = closeTimesheetAutomatically;
+    final lOther$closeTimesheetAutomatically =
+        other.closeTimesheetAutomatically;
+    if (_$data.containsKey('closeTimesheetAutomatically') !=
+        other._$data.containsKey('closeTimesheetAutomatically')) {
+      return false;
+    }
+    if (l$closeTimesheetAutomatically != lOther$closeTimesheetAutomatically) {
+      return false;
+    }
     return true;
   }
 
@@ -3201,10 +3246,16 @@ class Input$SettingUpdateInput {
     final l$id = id;
     final l$customer = customer;
     final l$project = project;
+    final l$minuteStep = minuteStep;
+    final l$closeTimesheetAutomatically = closeTimesheetAutomatically;
     return Object.hashAll([
       l$id,
       _$data.containsKey('customer') ? l$customer : const {},
       _$data.containsKey('project') ? l$project : const {},
+      _$data.containsKey('minuteStep') ? l$minuteStep : const {},
+      _$data.containsKey('closeTimesheetAutomatically')
+          ? l$closeTimesheetAutomatically
+          : const {},
     ]);
   }
 }
@@ -3222,6 +3273,8 @@ abstract class CopyWith$Input$SettingUpdateInput<TRes> {
     String? id,
     Enum$CustomerSettingEnum? customer,
     Enum$ProjectSettingEnum? project,
+    int? minuteStep,
+    bool? closeTimesheetAutomatically,
   });
 }
 
@@ -3242,6 +3295,8 @@ class _CopyWithImpl$Input$SettingUpdateInput<TRes>
     Object? id = _undefined,
     Object? customer = _undefined,
     Object? project = _undefined,
+    Object? minuteStep = _undefined,
+    Object? closeTimesheetAutomatically = _undefined,
   }) =>
       _then(Input$SettingUpdateInput._({
         ..._instance._$data,
@@ -3250,6 +3305,9 @@ class _CopyWithImpl$Input$SettingUpdateInput<TRes>
           'customer': (customer as Enum$CustomerSettingEnum?),
         if (project != _undefined)
           'project': (project as Enum$ProjectSettingEnum?),
+        if (minuteStep != _undefined) 'minuteStep': (minuteStep as int?),
+        if (closeTimesheetAutomatically != _undefined)
+          'closeTimesheetAutomatically': (closeTimesheetAutomatically as bool?),
       }));
 }
 
@@ -3263,6 +3321,8 @@ class _CopyWithStubImpl$Input$SettingUpdateInput<TRes>
     String? id,
     Enum$CustomerSettingEnum? customer,
     Enum$ProjectSettingEnum? project,
+    int? minuteStep,
+    bool? closeTimesheetAutomatically,
   }) =>
       _res;
 }
@@ -4929,6 +4989,177 @@ Enum$UserSortEnum fromJson$Enum$UserSortEnum(String value) {
       return Enum$UserSortEnum.EMAIL;
     default:
       return Enum$UserSortEnum.$unknown;
+  }
+}
+
+enum Enum$__TypeKind {
+  SCALAR,
+  OBJECT,
+  INTERFACE,
+  UNION,
+  ENUM,
+  INPUT_OBJECT,
+  LIST,
+  NON_NULL,
+  $unknown
+}
+
+String toJson$Enum$__TypeKind(Enum$__TypeKind e) {
+  switch (e) {
+    case Enum$__TypeKind.SCALAR:
+      return r'SCALAR';
+    case Enum$__TypeKind.OBJECT:
+      return r'OBJECT';
+    case Enum$__TypeKind.INTERFACE:
+      return r'INTERFACE';
+    case Enum$__TypeKind.UNION:
+      return r'UNION';
+    case Enum$__TypeKind.ENUM:
+      return r'ENUM';
+    case Enum$__TypeKind.INPUT_OBJECT:
+      return r'INPUT_OBJECT';
+    case Enum$__TypeKind.LIST:
+      return r'LIST';
+    case Enum$__TypeKind.NON_NULL:
+      return r'NON_NULL';
+    case Enum$__TypeKind.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$__TypeKind fromJson$Enum$__TypeKind(String value) {
+  switch (value) {
+    case r'SCALAR':
+      return Enum$__TypeKind.SCALAR;
+    case r'OBJECT':
+      return Enum$__TypeKind.OBJECT;
+    case r'INTERFACE':
+      return Enum$__TypeKind.INTERFACE;
+    case r'UNION':
+      return Enum$__TypeKind.UNION;
+    case r'ENUM':
+      return Enum$__TypeKind.ENUM;
+    case r'INPUT_OBJECT':
+      return Enum$__TypeKind.INPUT_OBJECT;
+    case r'LIST':
+      return Enum$__TypeKind.LIST;
+    case r'NON_NULL':
+      return Enum$__TypeKind.NON_NULL;
+    default:
+      return Enum$__TypeKind.$unknown;
+  }
+}
+
+enum Enum$__DirectiveLocation {
+  QUERY,
+  MUTATION,
+  SUBSCRIPTION,
+  FIELD,
+  FRAGMENT_DEFINITION,
+  FRAGMENT_SPREAD,
+  INLINE_FRAGMENT,
+  VARIABLE_DEFINITION,
+  SCHEMA,
+  SCALAR,
+  OBJECT,
+  FIELD_DEFINITION,
+  ARGUMENT_DEFINITION,
+  INTERFACE,
+  UNION,
+  ENUM,
+  ENUM_VALUE,
+  INPUT_OBJECT,
+  INPUT_FIELD_DEFINITION,
+  $unknown
+}
+
+String toJson$Enum$__DirectiveLocation(Enum$__DirectiveLocation e) {
+  switch (e) {
+    case Enum$__DirectiveLocation.QUERY:
+      return r'QUERY';
+    case Enum$__DirectiveLocation.MUTATION:
+      return r'MUTATION';
+    case Enum$__DirectiveLocation.SUBSCRIPTION:
+      return r'SUBSCRIPTION';
+    case Enum$__DirectiveLocation.FIELD:
+      return r'FIELD';
+    case Enum$__DirectiveLocation.FRAGMENT_DEFINITION:
+      return r'FRAGMENT_DEFINITION';
+    case Enum$__DirectiveLocation.FRAGMENT_SPREAD:
+      return r'FRAGMENT_SPREAD';
+    case Enum$__DirectiveLocation.INLINE_FRAGMENT:
+      return r'INLINE_FRAGMENT';
+    case Enum$__DirectiveLocation.VARIABLE_DEFINITION:
+      return r'VARIABLE_DEFINITION';
+    case Enum$__DirectiveLocation.SCHEMA:
+      return r'SCHEMA';
+    case Enum$__DirectiveLocation.SCALAR:
+      return r'SCALAR';
+    case Enum$__DirectiveLocation.OBJECT:
+      return r'OBJECT';
+    case Enum$__DirectiveLocation.FIELD_DEFINITION:
+      return r'FIELD_DEFINITION';
+    case Enum$__DirectiveLocation.ARGUMENT_DEFINITION:
+      return r'ARGUMENT_DEFINITION';
+    case Enum$__DirectiveLocation.INTERFACE:
+      return r'INTERFACE';
+    case Enum$__DirectiveLocation.UNION:
+      return r'UNION';
+    case Enum$__DirectiveLocation.ENUM:
+      return r'ENUM';
+    case Enum$__DirectiveLocation.ENUM_VALUE:
+      return r'ENUM_VALUE';
+    case Enum$__DirectiveLocation.INPUT_OBJECT:
+      return r'INPUT_OBJECT';
+    case Enum$__DirectiveLocation.INPUT_FIELD_DEFINITION:
+      return r'INPUT_FIELD_DEFINITION';
+    case Enum$__DirectiveLocation.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$__DirectiveLocation fromJson$Enum$__DirectiveLocation(String value) {
+  switch (value) {
+    case r'QUERY':
+      return Enum$__DirectiveLocation.QUERY;
+    case r'MUTATION':
+      return Enum$__DirectiveLocation.MUTATION;
+    case r'SUBSCRIPTION':
+      return Enum$__DirectiveLocation.SUBSCRIPTION;
+    case r'FIELD':
+      return Enum$__DirectiveLocation.FIELD;
+    case r'FRAGMENT_DEFINITION':
+      return Enum$__DirectiveLocation.FRAGMENT_DEFINITION;
+    case r'FRAGMENT_SPREAD':
+      return Enum$__DirectiveLocation.FRAGMENT_SPREAD;
+    case r'INLINE_FRAGMENT':
+      return Enum$__DirectiveLocation.INLINE_FRAGMENT;
+    case r'VARIABLE_DEFINITION':
+      return Enum$__DirectiveLocation.VARIABLE_DEFINITION;
+    case r'SCHEMA':
+      return Enum$__DirectiveLocation.SCHEMA;
+    case r'SCALAR':
+      return Enum$__DirectiveLocation.SCALAR;
+    case r'OBJECT':
+      return Enum$__DirectiveLocation.OBJECT;
+    case r'FIELD_DEFINITION':
+      return Enum$__DirectiveLocation.FIELD_DEFINITION;
+    case r'ARGUMENT_DEFINITION':
+      return Enum$__DirectiveLocation.ARGUMENT_DEFINITION;
+    case r'INTERFACE':
+      return Enum$__DirectiveLocation.INTERFACE;
+    case r'UNION':
+      return Enum$__DirectiveLocation.UNION;
+    case r'ENUM':
+      return Enum$__DirectiveLocation.ENUM;
+    case r'ENUM_VALUE':
+      return Enum$__DirectiveLocation.ENUM_VALUE;
+    case r'INPUT_OBJECT':
+      return Enum$__DirectiveLocation.INPUT_OBJECT;
+    case r'INPUT_FIELD_DEFINITION':
+      return Enum$__DirectiveLocation.INPUT_FIELD_DEFINITION;
+    default:
+      return Enum$__DirectiveLocation.$unknown;
   }
 }
 
